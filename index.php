@@ -1,6 +1,6 @@
 <?php
 //slt
-
+//ayoub
 //include"config/config.php";
 include"data/DataLayer.php";//base de donnees
 $model=new DataLayer();//instance de DataLayer
