@@ -88,14 +88,14 @@ session_start();
 if(isset($data)){
 $_SESSION["nom"]=$firstname;
 $_SESSION["email"]=$email;
-Header("Location:/tpphpmvc");}
+Header("Location:/MVC");}
 }
 
 function deconnecter(){
   session_start();
   session_unset();
   session_destroy();
-  Header("Location:/tpphpmvc");
+  Header("Location:/MVC");
 }
 
 function connecter(){
@@ -139,7 +139,7 @@ $_SESSION["nom"]=$data["firstname"];
 $_SESSION["email"]=$data["email"];
 $_SESSION["connect"]="oui";
 //print_r($_SESSION);
-Header("Location:/tpphpmvc");
+Header("Location:/MVC");
 }}
 }
 
@@ -214,7 +214,7 @@ function supprimer(){
   //print_r($_SESSION);
   //exit(0);
 
-  Header("Location:/tpphpmvc/showpanier.php");
+  Header("Location:/MVC/showpanier.php");
 }
 
 function categorie(){
@@ -302,10 +302,10 @@ $_SESSION["nom"]=$data["firstname"];
 $_SESSION["email"]=$data["email"];
 $_SESSION["connect"]="oui";
 //print_r($_SESSION);
-Header("Location:/tpphpmvc/administration.php");
+Header("Location:/MVC/administration.php");
 }
 else{
-  Header("Location:/tpphpmvc/admin.php");
+  Header("Location:/MVC/admin.php");
 }}
 }
 function administration (){

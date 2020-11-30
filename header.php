@@ -84,7 +84,7 @@
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
-								<li><a href="<?php echo "http://localhost/tpphpmvc/"; ?>">home</a></li>
+								<li><a href="<?php echo "http://localhost/MVC/"; ?>">home</a></li>
 								<li>
 									<li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle " id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Catégories</a>
