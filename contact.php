@@ -1,3 +1,4 @@
+<?php include('src/functions.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,83 +19,27 @@
 </head>
 
 <body>
-
-<div class="super_container">
-
-	<!-- Header -->
-
 <?php require_once('header.php'); ?>
+<?php
 
-	<div class="fs_menu_overlay"></div>
+?>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="mx-auto" style="width: 80%;">
 
-	<!-- Hamburger Menu -->
-
-	<div class="hamburger_menu">
-		<div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
-		<div class="hamburger_menu_content text-right">
-			<ul class="menu_top_nav">
-				<li class="menu_item has-children">
-					<a href="#">
-						usd
-						<i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="menu_selection">
-						<li><a href="#">cad</a></li>
-						<li><a href="#">aud</a></li>
-						<li><a href="#">eur</a></li>
-						<li><a href="#">gbp</a></li>
-					</ul>
-				</li>
-				<li class="menu_item has-children">
-					<a href="#">
-						English
-						<i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="menu_selection">
-						<li><a href="#">French</a></li>
-						<li><a href="#">Italian</a></li>
-						<li><a href="#">German</a></li>
-						<li><a href="#">Spanish</a></li>
-					</ul>
-				</li>
-				<li class="menu_item has-children">
-					<a href="#">
-						My Account
-						<i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="menu_selection">
-						<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-						<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
-					</ul>
-				</li>
-				<li class="menu_item"><a href="#">home</a></li>
-				<li class="menu_item"><a href="#">shop</a></li>
-				<li class="menu_item"><a href="#">promotion</a></li>
-				<li class="menu_item"><a href="#">pages</a></li>
-				<li class="menu_item"><a href="#">blog</a></li>
-				<li class="menu_item"><a href="#">contact</a></li>
-			</ul>
-		</div>
-	</div>
-
-	<div class="container contact_container">
-		<div class="row">
-			<div class="col">
-
-				<!-- Breadcrumbs -->
-
-				<div class="breadcrumbs d-flex flex-row align-items-center">
+<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
 						<li><a href="index.html">Home</a></li>
 						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Contact</a></li>
 					</ul>
 				</div>
 
-			</div>
-		</div>
-
 		<!-- Map Container -->
-
 		<div class="row">
 			<div class="col">
 				<div id="google_map">
@@ -144,15 +89,14 @@
 				<div class="get_in_touch_contents">
 					<h1>Get In Touch With Us!</h1>
 					<p>Fill out the form below to recieve a free and confidential.</p>
-					<form action="post">
+					<form method="POST" action="addMessage.php">
 						<div>
-							<input id="input_name" class="form_input input_name input_ph" type="text" name="name" placeholder="Name" required="required" data-error="Name is required.">
-							<input id="input_email" class="form_input input_email input_ph" type="email" name="email" placeholder="Email" required="required" data-error="Valid email is required.">
-							<input id="input_website" class="form_input input_website input_ph" type="url" name="name" placeholder="Website" required="required" data-error="Name is required.">
-							<textarea id="input_message" class="input_ph input_message" name="message"  placeholder="Message" rows="3" required data-error="Please, write us a message."></textarea>
+							<input id="input_name" class="form_input input_name input_ph" type="text" name="cname" placeholder="Name" required="required" data-error="Name is required.">
+							<input id="input_email" class="form_input input_email input_ph" type="email" name="cemail" placeholder="Email" required="required" data-error="Valid email is required.">
+							<textarea id="input_message" class="input_ph input_message" name="cmessage"  placeholder="Message" rows="3" required data-error="Please, write us a message."></textarea>
 						</div>
 						<div>
-							<button id="review_submit" type="submit" class="red_button message_submit_btn trans_300" value="Submit">send message</button>
+							<button id="review_submit" type="submit" class="red_button message_submit_btn trans_300">send message</button>
 						</div>
 					</form>
 				</div>
@@ -173,10 +117,10 @@
 					</div>
 				</div>
 				<div class="col-lg-6">
-					<form action="post">
+					<form method="POST" action="newsletter.php">
 						<div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
-							<input id="newsletter_email" type="email" placeholder="Your email" required="required" data-error="Valid email is required.">
-							<button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">subscribe</button>
+							<input id="newsletter_email" type="email" placeholder="Your email" required="required" data-error="Valid email is required." name="newsletter">
+							<button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300">subscribe</button>
 						</div>
 					</form>
 				</div>
@@ -185,11 +129,9 @@
 	</div>
 
 	<!-- Footer -->
-
-	<?php include"footer.php"?>
-
+	<?php require_once('footer.php'); ?>
 </div>
-
+</div>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="styles/bootstrap4/popper.js"></script>
 <script src="styles/bootstrap4/bootstrap.min.js"></script>
@@ -202,3 +144,7 @@
 </body>
 
 </html>
+
+<?php
+
+?>

@@ -5,11 +5,10 @@
 <body>
 <div class="super_container">
 <?php include"header.php";?>
-<br><br><br><br><br>
 <div class="super_container">
-
+<div class="main_slider">
 <?php echo $content; ?>
-
+</div>
 </div>
 <?php include"footer.php"?>
 
