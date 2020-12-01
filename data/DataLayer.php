@@ -265,6 +265,26 @@ class DataLayer{
         }
     }
 
+    //hedhom li zed'hom Taha
+
+    function createMessage($name, $email, $message){
+        $sql = 'INSERT INTO messages (name, email, message) VALUES
+        (:na, :em, :mess)';
+        try {
+            $result = $this->connexion->prepare($sql);
+            $var = $result->execute(array(
+                ':na' => $name,
+                ':em' => $email,
+                ':mess' => $message
+            ));
+            if($var){
+                return true;
+            }
+            return false;
+        }catch (PDOException $th) {
+            return $th;
+        }
+    }
 
 
 

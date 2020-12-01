@@ -368,3 +368,31 @@ function ajouterproduit(){
   return $_POST;
 
 }
+
+//hedhom li zed'hom taha
+
+function addMessage(){
+  global $model;
+  $contact_name = $_POST["cname"];
+  $contact_email = $_POST["cemail"];
+  $contact_message = $_POST["cmessage"];
+  $data = $model->createMessage($contact_name, $contact_email, $contact_message);
+  //lazemni nziid js alert li yqolou rahou l message wsoll.
+  Header("Location:/MVC/contact.php");
+}
+
+function newsletter(){
+  echo "i am called w nabi";
+  $to_email_address = $_POST['newsletter'];
+  $subject = 'Welcome to our Site';
+  $message = 'we love you';
+  $headers = 'From: Taha&Ayoub&Mahdi@ENIS.tn';
+  try{
+    echo "ena rani lenna";
+    mail($to_email_address,$subject,$message,$headers);
+  }
+  catch(Exception $e){
+    echo 'Message: '.$e->getMessage();
+  }
+  Header('Location:/MVC/contact.php');
+}
