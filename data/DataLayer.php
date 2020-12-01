@@ -286,7 +286,26 @@ class DataLayer{
         }
     }
 
+ function rechercher($name){
+        
+        $sql = "SELECT * FROM product WHERE name LIKE '%$name%'";
+         try {
+            $result = $this->connexion->prepare($sql);
 
+            $var = $result->execute();
+            $data = $result->fetchAll(PDO::FETCH_ASSOC);//un tableau de la base de données
+            if($data){
+                return $data;
+
+            }else{
+                return FALSE;
+            }
+
+        } catch (PDOException $th) {
+            return NULL;
+        }
+
+    }
 
 
 

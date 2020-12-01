@@ -84,29 +84,21 @@
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
-								<li><a href="<?php echo "http://localhost/MVC/"; ?>">home</a></li>
-								<li>
-									<li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle " id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Catégories</a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <?php
-                    foreach ($category as $key => $value) {
-                        echo '<a class="dropdown-item" href="'.$value["id"].'">'.$value["name"].'</a>';;
-                    }
-
-                ?>
-               <!-- <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>-->
-            </div>
-                 </li>
+								<li><a href="<?php echo "http://localhost/MVC/"; ?>">Home</a></li>
+								
+								<li><a href="produit.php">Produits</a></li>
+								<li><a href="">Promotion</a></li>
+								<li><a href="contact.php">Contact</a></li>
+								<li> <form method="post" action="recherche.php">
+							  
+								<input size='30' type="text" name="recherche" class=" auto-save form-control"   placeholder="Rechercher un produit " ></li>
+								
+								<li><button class='btn btn-danger' style="width: 60px " type="submit"><i class="fa fa-search"  aria-hidden="true"></i></button>
 								</li>
-								<li><a href="produit.php">produits</a></li>
-								<li><a href="#">promotion</a></li>
-								<li><a href="contact.php">contact</a></li>
+							    </form>
 							</ul>
 							<ul class="navbar_user">
-								<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+								
 
 								<li class="checkout">
 									<a href="showpanier.php">

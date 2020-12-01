@@ -396,3 +396,55 @@ function newsletter(){
   }
   Header('Location:/MVC/contact.php');
 }
+function recherche(){
+error_reporting(0);
+session_start();
+  if(!isset($_SESSION['panier'])){
+                                   $tab=array();
+                                   //echo"<br><br><br><br><br> non";
+                                   //print_r($_SESSION);
+                                   $_SESSION['panier']=$tab;
+                                   $_SESSION['size']=0;
+                                       }else{
+                       if(isset($_POST['id'])){
+                        // echo"<br><br><br><br><br> oui";
+                        
+                     array_push($_SESSION["panier"],$_POST["id"]);
+                    // print_r($_SESSION["panier"]);
+                     $_SESSION['size']=$_SESSION['size']+1;}}
+
+
+global $model;
+$data=$model->rechercher($_POST['recherche']);
+
+foreach ($data as $key => $value){
+  if($_POST['recherche']!=$value["name"]){
+  $resultat="<br></br><br></br><br></br>
+  <div>
+
+  <h2> Oups ! Aucun résultat disponible </h2></br>
+  <h4>- Vérifiez que vous n'avez pas fait de faute de frappe </h4>
+  <h4>- Essayez avec un autre mot clé ou synonyme</h4>
+  </div>
+  ";
+  }
+  else{
+  $id=$value["id"];
+  $img='produit'.'/'.$value["image"];
+  $resultat .="
+<div class='card' style='width: 18rem; display:inline-block;'>
+        <img src=$img class='card-img-top'>
+    <div class='card-body'>
+          <h5 class='card-title'></h5>
+<form  action='produit.php' method='post'>
+          <a href='' class='btn btn-primary'>Détails</a>
+          <button type='submit' class='btn btn-danger' name='id' value=$id>add</button>
+
+</form>
+    </div>
+      </div>";
+}
+
+return "<div class='container'>".$resultat."</div>";
+}
+}
