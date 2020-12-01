@@ -23,7 +23,7 @@ foreach ($category as $key => $value) {
 //exit(0);
     // controller
 		if(!isset($url[1]) ){//accede directement a la page d'accueil
-			include"src/accueil.php";//afficher seullement page accueil
+			include"src/new_acc.php";//afficher seullement page accueil
 			exit(0);
 		}
 		else if(in_array($url[1],$route) ){

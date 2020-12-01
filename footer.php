@@ -1,33 +1,47 @@
-<footer class="footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
-          <ul class="footer_nav">
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">FAQs</a></li>
-            <li><a href="contact.html">Contact us</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
-          <ul>
-            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-            <li><a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a></li>
-            <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-          </ul>
-        </div>
-      </div>
+<br>
+<br>
+<br>
+<div class="footer-clean">
+        <footer>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#">Web design</a></li>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">Hosting</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>About</h3>
+                        <ul>
+                            <li><a href="#">Company</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Legacy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Careers</h3>
+                        <ul>
+                            <li><a href="#">Job openings</a></li>
+                            <li><a href="#">Employee success</a></li>
+                            <li><a href="#">Benefits</a></li>
+                        </ul>
+                    </div>
+                      <p class="copyright">Company Name © 2017</p>
+                      <div style="right:140px;" class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
+                      <ul>
+                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                      </ul>
+					</div>
+				</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="footer_nav_container">
-          <div class="cr">©2018 All Rights Reserverd. Template by <a href="#">Colorlib</a>.Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
+
+    <br>
