@@ -14,7 +14,8 @@ $url = explode('/',$url);//tableau
 //exit(0);
 $route = array("produit.php","achat.php","showpanier.php","ajouter.php","authentifier.php","modifierQte.php",
                     "inscription.php","connecter.php","administration.php","deconnecter.php","supprimer.php",
-                    "categorie.php","admin.php","authentifieradmin.php","ajouterproduit.php","recherche.php"  );
+                    "categorie.php","admin.php","authentifieradmin.php","ajouterproduit.php","recherche.php",
+                    "modifproduit.php","dashboard.php");
 $tabcategory=array();
 foreach ($category as $key => $value) {
   array_push($tabcategory,$value["id"]);

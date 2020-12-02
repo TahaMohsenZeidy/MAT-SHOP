@@ -260,6 +260,85 @@ function categorie(){
   return "<div class='container'>".$resultat."</div>";
 }
 
+//hedhom li zed'hom taha
+
+function addMessage(){
+  global $model;
+  $contact_name = $_POST["cname"];
+  $contact_email = $_POST["cemail"];
+  $contact_message = $_POST["cmessage"];
+  $data = $model->createMessage($contact_name, $contact_email, $contact_message);
+  //lazemni nziid js alert li yqolou rahou l message wsoll.
+  Header("Location:/MVC/contact.php");
+}
+
+function newsletter(){
+  echo "i am called w nabi";
+  $to_email_address = $_POST['newsletter'];
+  $subject = 'Welcome to our Site';
+  $message = 'we love you';
+  $headers = 'From: Taha&Ayoub&Mahdi@ENIS.tn';
+  try{
+    echo "ena rani lenna";
+    mail($to_email_address,$subject,$message,$headers);
+  }
+  catch(Exception $e){
+    echo 'Message: '.$e->getMessage();
+  }
+  Header('Location:/MVC/contact.php');
+}
+function recherche(){
+error_reporting(0);
+session_start();
+  if(!isset($_SESSION['panier'])){
+                                   $tab=array();
+                                   //echo"<br><br><br><br><br> non";
+                                   //print_r($_SESSION);
+                                   $_SESSION['panier']=$tab;
+                                   $_SESSION['size']=0;
+                                       }else{
+                       if(isset($_POST['id'])){
+                        // echo"<br><br><br><br><br> oui";
+
+                     array_push($_SESSION["panier"],$_POST["id"]);
+                    // print_r($_SESSION["panier"]);
+                     $_SESSION['size']=$_SESSION['size']+1;}}
+
+
+global $model;
+$data=$model->rechercher($_POST['recherche']);
+
+foreach ($data as $key => $value){
+  if($_POST['recherche']!=$value["name"]){
+  $resultat="<br></br><br></br><br></br>
+  <div>
+
+  <h2> Oups ! Aucun résultat disponible </h2></br>
+  <h4>- Vérifiez que vous n'avez pas fait de faute de frappe </h4>
+  <h4>- Essayez avec un autre mot clé ou synonyme</h4>
+  </div>
+  ";
+  }
+  else{
+  $id=$value["id"];
+  $img='produit'.'/'.$value["image"];
+  $resultat .="
+<div class='card' style='width: 18rem; display:inline-block;'>
+        <img src=$img class='card-img-top'>
+    <div class='card-body'>
+          <h5 class='card-title'></h5>
+<form  action='produit.php' method='post'>
+          <a href='' class='btn btn-primary'>Détails</a>
+          <button type='submit' class='btn btn-danger' name='id' value=$id>add</button>
+
+</form>
+    </div>
+      </div>";
+}
+
+return "<div class='container'>".$resultat."</div>";
+}
+}
 
 /************     partie admin    *******************/
 function admin(){
@@ -302,149 +381,18 @@ $_SESSION["nom"]=$data["firstname"];
 $_SESSION["email"]=$data["email"];
 $_SESSION["connect"]="oui";
 //print_r($_SESSION);
-Header("Location:/MVC/administration.php");
+Header("Location:/MVC/dashboard.php");
 }
 else{
   Header("Location:/MVC/admin.php");
 }}
 }
-function administration (){
+function dashboard(){
 global $model;
-  $resultat="<br><br><br><br>
-  <div class='row'>
-  <div class='col'>
-  <div class='mx-auto' style='width: 500px;'>
-  <form  action='ajouterproduit.php' method='post'>
-    <!-- Input -->
-    <div class='mb-3'>
-      <div class='input-group input-group form'>
-        <input type='text' class='form-control' name='email'  placeholder='le nom du produit' aria-label='Entrez votre adresse email'>
-        </div>
-        <div>
-        <input type='text' class='form-control' name='email'  placeholder='price' aria-label='Entrez votre adresse email'>
-        </div>
-        <div>
-        <input type='text' class='form-control' name='email'  placeholder='categorie' aria-label='Entrez votre adresse email'>
-        </div>
-        <div class='form-group'>
-    <span>apporter une img</span><input type='file' class='form-control-file' id='exampleFormControlFile1'>
-  </div>
-    </div>
-    <button type='submit' class='btn btn-block btn-primary'>S'inscrire</button>
-  </form></div><br></div>
-";
-//print_r($_POST);
-$data=$model->getCustomer();
-//print_r($data);
-$resultat .="
-<div class='col'>
-<div class='mx-auto' style='width: 600px;'>
-<table class='table table-dark'>
-  <thead>
-    <tr>
-      <th scope='col'>#</th>
-      <th scope='col'>id</th>
-      <th scope='col'>firstname</th>
-      <th scope='col'>email</th>
-    </tr>
-  </thead>";
-  foreach ($data as $key => $value) {
-    $resultat .="<tbody>
-      <tr>
-        <th scope='row'>".$key=($key+1)."</th>
-        <td>".$value["id"]."</td>
-        <td>".$value["firstname"]."</td>
-        <td>".$value["email"]."</td>
-      </tr>
-
-      ";
-  }
-  $resultat .="</tbody></table></div></div></div>";
-return $resultat;
-
+include "dashboard.php";
+//return $resulat;
 }
-function ajouterproduit(){
-
-  return $_POST;
-
-}
-
-//hedhom li zed'hom taha
-
-function addMessage(){
-  global $model;
-  $contact_name = $_POST["cname"];
-  $contact_email = $_POST["cemail"];
-  $contact_message = $_POST["cmessage"];
-  $data = $model->createMessage($contact_name, $contact_email, $contact_message);
-  //lazemni nziid js alert li yqolou rahou l message wsoll.
-  Header("Location:/MVC/contact.php");
-}
-
-function newsletter(){
-  echo "i am called w nabi";
-  $to_email_address = $_POST['newsletter'];
-  $subject = 'Welcome to our Site';
-  $message = 'we love you';
-  $headers = 'From: Taha&Ayoub&Mahdi@ENIS.tn';
-  try{
-    echo "ena rani lenna";
-    mail($to_email_address,$subject,$message,$headers);
-  }
-  catch(Exception $e){
-    echo 'Message: '.$e->getMessage();
-  }
-  Header('Location:/MVC/contact.php');
-}
-function recherche(){
-error_reporting(0);
-session_start();
-  if(!isset($_SESSION['panier'])){
-                                   $tab=array();
-                                   //echo"<br><br><br><br><br> non";
-                                   //print_r($_SESSION);
-                                   $_SESSION['panier']=$tab;
-                                   $_SESSION['size']=0;
-                                       }else{
-                       if(isset($_POST['id'])){
-                        // echo"<br><br><br><br><br> oui";
-                        
-                     array_push($_SESSION["panier"],$_POST["id"]);
-                    // print_r($_SESSION["panier"]);
-                     $_SESSION['size']=$_SESSION['size']+1;}}
-
-
+function modifproduit(){
 global $model;
-$data=$model->rechercher($_POST['recherche']);
-
-foreach ($data as $key => $value){
-  if($_POST['recherche']!=$value["name"]){
-  $resultat="<br></br><br></br><br></br>
-  <div>
-
-  <h2> Oups ! Aucun résultat disponible </h2></br>
-  <h4>- Vérifiez que vous n'avez pas fait de faute de frappe </h4>
-  <h4>- Essayez avec un autre mot clé ou synonyme</h4>
-  </div>
-  ";
-  }
-  else{
-  $id=$value["id"];
-  $img='produit'.'/'.$value["image"];
-  $resultat .="
-<div class='card' style='width: 18rem; display:inline-block;'>
-        <img src=$img class='card-img-top'>
-    <div class='card-body'>
-          <h5 class='card-title'></h5>
-<form  action='produit.php' method='post'>
-          <a href='' class='btn btn-primary'>Détails</a>
-          <button type='submit' class='btn btn-danger' name='id' value=$id>add</button>
-
-</form>
-    </div>
-      </div>";
-}
-
-return "<div class='container'>".$resultat."</div>";
-}
+include "modifproduit.php";
 }
