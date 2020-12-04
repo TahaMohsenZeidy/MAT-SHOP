@@ -1,4 +1,6 @@
 <?php
+require"head.php";
+
 function produit(){
 error_reporting(0);
 session_start();
@@ -23,22 +25,62 @@ $data=$model->getProduct();
 //print_r($data);
 $resultat="";
 foreach ($data as $key => $value){
+   $prix=$value["price"];
+  $name=$value["name"];
   $id=$value["id"];
-	$img='produit'.'/'.$value["image"];
-	$resultat .="
-<div class='card' style='width: 18rem; display:inline-block;'>
-        <img src=$img class='card-img-top'>
-		<div class='card-body'>
-          <h5 class='card-title'></h5>
-<form  action='' method='post'>
-          <a href='' class='btn btn-primary'>Détails</a>
-          <button type='submit' class='btn btn-danger' name='id' value=$id>add</button>
+  $img='produit'.'/'.$value["image"];
+  $resultat .="
 
-</form>
-		</div>
-      </div>";
+ 
+             <div class='product-item men' style='display:inline-block; width:236.8px;'>
+              <div class='product discount product_filter'>
+                <div class='product_image'>
+                  <img src=$img alt=''>
+                </div>
+                <div class='favorite favorite_left'></div>
+               
+                <div class='product_info'>
+                  <h6 class='product_name'>$name </a></h6>
+                  <div class='product_price'>$prix dt</div>
+                </div>
+              </div>
+              <div class='red_button add_to_cart_button'>
+              <form  action='' method='post'>
+          
+                <button type='submit'  class='button' name='id' value=$id>Ajouter au panier </button>
+
+              </form>
+              
+              </div>
+            </div>
+            <style>
+.button {
+  width:236.8;
+  height:40px;
+  background-color:#fe4c50;
+  border: none;
+  color: white;
+  padding: 1px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+
+
+</style>
+           ";
+
+
+
 }
-return "<div class='container'>".$resultat."</div>";
+return "
+<div class='row' style='margin-left:150px;' >
+      <div class='col' >
+          <div class='product-grid' data-isotope='{ 'itemSelector': '.product-item', 'layoutMode': 'fitRows' }>".$resultat."</div> </div></div> ";
+
+
 }
 
 function inscription(){
@@ -309,7 +351,7 @@ global $model;
 $data=$model->rechercher($_POST['recherche']);
 
 foreach ($data as $key => $value){
-  if($_POST['recherche']!=$value["name"]){
+  if(empty($data)){
   $resultat="<br></br><br></br><br></br>
   <div>
 
@@ -320,24 +362,61 @@ foreach ($data as $key => $value){
   ";
   }
   else{
+  $prix=$value["price"];
+  $name=$value["name"];
   $id=$value["id"];
   $img='produit'.'/'.$value["image"];
   $resultat .="
-<div class='card' style='width: 18rem; display:inline-block;'>
-        <img src=$img class='card-img-top'>
-    <div class='card-body'>
-          <h5 class='card-title'></h5>
-<form  action='produit.php' method='post'>
-          <a href='' class='btn btn-primary'>Détails</a>
-          <button type='submit' class='btn btn-danger' name='id' value=$id>add</button>
 
-</form>
-    </div>
-      </div>";
+ 
+             <div class='product-item men' style='display:inline-block; width:236.8px;'>
+              <div class='product discount product_filter'>
+                <div class='product_image'>
+                  <img src=$img alt=''>
+                </div>
+                <div class='favorite favorite_left'></div>
+               
+                <div class='product_info'>
+                  <h6 class='product_name'>$name </a></h6>
+                  <div class='product_price'>$prix dt</div>
+                </div>
+              </div>
+              <div class='red_button add_to_cart_button'>
+              <form  action='produit.php' method='post'>
+          
+                <button type='submit'  class='button' name='id' value=$id>Ajouter au panier </button>
+
+              </form>
+              
+              </div>
+            </div>
+            <style>
+.button {
+  width:236.8;
+  height:40px;
+  background-color:#fe4c50;
+  border: none;
+  color: white;
+  padding: 1px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+
+
+</style>
+           ";
 }
 
-return "<div class='container'>".$resultat."</div>";
+
 }
+return "
+<div class='row' style='margin-left:150px;' >
+      <div class='col' >
+          <div class='product-grid' data-isotope='{ 'itemSelector': '.product-item', 'layoutMode': 'fitRows' }>".$resultat."</div> </div></div> ";
+
 }
 
 /************     partie admin    *******************/
