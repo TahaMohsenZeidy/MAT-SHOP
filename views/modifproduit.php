@@ -1,7 +1,11 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<?php include"head.php";?>
+<body>
+<?php include"header.php";?>
 <div class="main_slider">
   <div class="container-fluid">
-    <div class="row">
       <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
         <div class="sidebar-sticky pt-3">
           <ul class="nav flex-column">
@@ -71,6 +75,58 @@
           </ul>
         </div>
       </nav>
+      <script>
+      <?php
+      $data=$model->getorders();
+      foreach ($data as $key => $value) {
+        $redon[$key]=$value["id_product"];
+      }
+      $result=array_count_values($redon);//[id_product]=>nbre de redon
+
+      foreach ($result as $key => $value) {
+        $oneprod=$model->getProduct(null,null,$key);
+        $nom[$key]=$oneprod[0]['name'];
+      }
+
+      ?>
+
+window.onload = function() {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	theme: "light2", // "light1", "light2", "dark1", "dark2"
+	exportEnabled: true,
+	animationEnabled: true,
+	title: {
+		text: "les 3 meilleurs produits achetés id_produit-%"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 25,
+		toolTipContent: "<b>{label}</b>: {y}%",
+		showInLegend: "true",
+		legendText: "{label}",
+		indexLabelFontSize: 16,
+		indexLabel: "{label} - {y}%",
+		dataPoints: [
+      <?php $i=0;
+      arsort($result);
+       foreach ($result as $key => $value) {
+         $a=$nom[$key];?>
+			{ y: <?php echo $value; ?>, label: <?php echo $key; ?> },
+			<?php $i++;
+    if($i == 3){break;}  }?>
+		]
+	}]
+});
+chart.render();
+
+}
+</script>
+<div class="row">
+  <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</div>
+<div class="row">
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 
@@ -101,9 +157,57 @@
                   </div>
                   <input type="submit" name="submit" class="btn btn-primary">
               </form>
-</main>
 
-    </div>
+
+<br>
+<?php
+$data=$model->getProduct();
+$resultat ="
+<h2 class='h2'>Table des produits</h2>
+<div class='col-sm'>
+<div class='mx-auto' style='width: 1000px;'>
+<table class='table table-dark'>
+  <thead>
+    <tr>
+      <th scope='col'>#</th>
+      <th scope='col'>id</th>
+      <th scope='col'>nom du produit</th>
+      <th scope='col'>prix</th>
+      <th scope='col'>quantité</th>
+      <th scope='col'>image</th>
+    </tr>
+  </thead>";
+  foreach ($data as $key => $value) {
+    $img='produit'.'/'.$value["image"];
+$resultat .="<tbody>
+      <tr>
+        <th scope='row'>".$key=($key+1)."</th>
+        <td>".$value["id"]."</td>
+        <td>".$value["name"]."</td>
+        <td>".$value["price"]."</td>
+        <td>".$value["stock"]."</td>
+        <td><img src=$img alt=''></td>
+      </tr>
+      ";
+  }
+  $resultat .="</tbody></table></div></div>";?>
+<br>
+<?php echo $resultat ?>
+</main>
+</div>
+</div>
+    <?php include"footer.php"?>
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="styles/bootstrap4/popper.js"></script>
+    <script src="styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
+    <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="plugins/easing/easing.js"></script>
+    <script src="js/custom.js"></script>
+    </body>
+
+    </html>
 
       <?php
        $target_dir = "produit/";
@@ -113,6 +217,7 @@
         //print_r($_POST);
         $var=$_FILES["img"]["name"];
         $model->insertProduct($_POST["nomprod"],$_POST["description"],$_POST["aprix"],$_POST["stock"],$_POST["categ"],$var);
-
       }
+
+
       ?>

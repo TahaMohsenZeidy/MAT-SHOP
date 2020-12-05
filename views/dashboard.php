@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<?php include"head.php";?>
+<body>
+<?php include"header.php";?>
 <div class="main_slider">
 <div class="container-fluid">
   <div class="row">
@@ -81,7 +87,8 @@
       //$model=new DataLayer();//instance de DataLayer
       $data=$model->getorders();
       $resultat ="
-      <div class='col'>
+
+      <div class='col-sm'>
       <div class='mx-auto' style='width: 600px;'>
       <table class='table table-dark'>
         <thead>
@@ -113,6 +120,40 @@
       		if($rest=='08'){
       			$a8++;
       		}
+          if($rest=='01'){
+      			$a1++;
+      		}
+          if($rest=='02'){
+      			$a2++;
+      		}
+          if($rest=='03'){
+      			$a3++;
+      		}
+          if($rest=='04'){
+      			$a4++;
+      		}
+          if($rest=='05'){
+      			$a5++;
+      		}
+          if($rest=='06'){
+      			$a6++;
+      		}
+          if($rest=='07'){
+      			$a7++;
+      		}
+          if($rest=='09'){
+      			$a9++;
+      		}
+          if($rest=='10'){
+      			$a10++;
+      		}
+          if($rest=='11'){
+      			$a11++;
+      		}
+          if($rest=='12'){
+      			$a12++;
+      		}
+
 
 
 
@@ -166,12 +207,15 @@
 
           chart.render();
         }
+
         </script>
         <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 
-        <div id="chartContainer" style="height: 300px; max-width: 920px; margin: 0px auto;">
-        </div>
+
+        <div id="chartContainer" style="height: 300px; max-width: 920px; margin: 0px auto;"></div>
+
+
 
       <br>
       <h1 class="h2">tableau des commandes</h1>
@@ -180,3 +224,14 @@
     </main>
   </div>
 </div>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="plugins/easing/easing.js"></script>
+<script src="js/custom.js"></script>
+</body>
+
+</html>

@@ -31,14 +31,14 @@ foreach ($data as $key => $value){
   $img='produit'.'/'.$value["image"];
   $resultat .="
 
- 
+
              <div class='product-item men' style='display:inline-block; width:236.8px;'>
               <div class='product discount product_filter'>
                 <div class='product_image'>
                   <img src=$img alt=''>
                 </div>
                 <div class='favorite favorite_left'></div>
-               
+
                 <div class='product_info'>
                   <h6 class='product_name'>$name </a></h6>
                   <div class='product_price'>$prix dt</div>
@@ -46,11 +46,11 @@ foreach ($data as $key => $value){
               </div>
               <div class='red_button add_to_cart_button'>
               <form  action='' method='post'>
-          
+
                 <button type='submit'  class='button' name='id' value=$id>Ajouter au panier </button>
 
               </form>
-              
+
               </div>
             </div>
             <style>
@@ -213,6 +213,7 @@ function showpanier(){
       $prix=$table['price'];
       $qte=$redon[$value];
       $id=$table['id'];
+      //$_SESSION["0"]=$qte;
   	$img='produit'.'/'.$table["image"];
   		$result .= "<tr>
       <th scope='row'>".$table['id']."</th>
@@ -227,7 +228,7 @@ function showpanier(){
     </td>
     <td>
     <form action='achat.php' method='post'>
-    <button type='submit' class='btn btn-success' name='id1' value=".$table['id']."  >acheter</button>
+    <button type='submit' class='btn btn-success' name='id1' value=$id  >acheter</button>
     </form>
     </td>
     </tr>";
@@ -244,9 +245,17 @@ return $result;
 }
 
 function achat(){
-  $resultat="<div>". $_POST."</div>";
-  return $resultat;
-
+  session_start();
+  global $model;
+//  print_r($_POST["id1"]);
+  $data=$model->getProduct(null,null,$_POST["id1"]);
+  $email=$_SESSION["email"];
+  $tab=$model->getoneCustomer($email);
+  $idCustomers=$tab["0"]["id"];
+  $idprod=$data["0"]["id"];
+  //print_r($_SESSION);
+  $t=$model->createOrders($idCustomers,$idprod,"1",$data["0"]["price"]);
+  Header("Location:/MVC/showpanier.php");
 }
 
 function supprimer(){
@@ -368,14 +377,14 @@ foreach ($data as $key => $value){
   $img='produit'.'/'.$value["image"];
   $resultat .="
 
- 
+
              <div class='product-item men' style='display:inline-block; width:236.8px;'>
               <div class='product discount product_filter'>
                 <div class='product_image'>
                   <img src=$img alt=''>
                 </div>
                 <div class='favorite favorite_left'></div>
-               
+
                 <div class='product_info'>
                   <h6 class='product_name'>$name </a></h6>
                   <div class='product_price'>$prix dt</div>
@@ -383,11 +392,11 @@ foreach ($data as $key => $value){
               </div>
               <div class='red_button add_to_cart_button'>
               <form  action='produit.php' method='post'>
-          
+
                 <button type='submit'  class='button' name='id' value=$id>Ajouter au panier </button>
 
               </form>
-              
+
               </div>
             </div>
             <style>
@@ -468,10 +477,11 @@ else{
 }
 function dashboard(){
 global $model;
-include "dashboard.php";
-//return $resulat;
+include "views/dashboard.php";
+exit(0);
 }
 function modifproduit(){
 global $model;
-include "modifproduit.php";
+include "views/modifproduit.php";
+exit(0);
 }
