@@ -97,8 +97,8 @@ class DataLayer{
      * @return NULL s'il y a une exception déclenchée
      */
     function createOrders($idCustomers,$idPoduct,$quantity,$price){
-        $sql = "INSERT INTO `orders`(`id_customers`, `id_product`, `quantity`, `price`) VALUES
-        (:id_customers,:id_product,:quantity,:price)";
+        $sql = 'INSERT INTO orders (id_customers, id_product, quantity, price) VALUES
+        (:id_customers,:id_product,:quantity,:price)';
         try {
             $result = $this->connexion->prepare($sql);
             $var = $result->execute(array(
@@ -118,22 +118,30 @@ class DataLayer{
 
     }
 
-    function insertProduct($name,$price,$category,$image){
-      $sql = "INSERT INTO 'product'('name', 'price', 'category', 'image') VALUES
-      (:name,:price,:category,:image)";
+    function insertProduct($name,$description,$price,$stock,$category,$image){
+      $sql = "INSERT INTO product ( name, description, price, stock , category, image) VALUES
+      (:name,:description,:price,:stock,:category,:image)";
       try {
+        echo"s1";
           $result = $this->connexion->prepare($sql);
+          echo "string2";
           $var = $result->execute(array(
               ':name' => $name,
+              ':description'=>$description,
               ':price' => $price,
+              ':stock'=>$stock,
               ':category' => $category,
               ':image' => $image
           ));
+          echo "string3";
           if($var){
+            echo "string4";
               return TRUE;
           }else{
+            echo "string5";
               return FALSE;
           }
+          exit(0);
       } catch (PDOException $th) {
           return NULL;
       }
@@ -151,7 +159,7 @@ class DataLayer{
      */
     // exemple de paramètre array('pseudo'=>'jean','firstname'=>'DUPONT')
     function updateInfosCustomer($newInfos){
-        $sql = "UPDATE `customers` SET ";
+        $sql = "UPDATE 'customers' SET ";
         $id = $newInfos["id"];
         unset($newInfos["id"]);
         try {
@@ -210,7 +218,7 @@ class DataLayer{
      * @return NULL s'il y a une exception déclenchée
      */
     function getCustomer(){
-        $sql = "SELECT * FROM customers";
+        $sql = "SELECT * FROM customers ";
         try {
             $result = $this->connexion->prepare($sql);
             $var = $result->execute();
@@ -225,8 +233,23 @@ class DataLayer{
         } catch (PDOException $th) {
             return NULL;
         }
+    }
+    function getoneCustomer($email){
+        $sql = "SELECT * FROM customers WHERE email = '$email' ";
+        try {
+            $result = $this->connexion->prepare($sql);
+            $var = $result->execute();
+            $data = $result->fetchAll(PDO::FETCH_ASSOC);
+            if($data){
+                unset($data[0]['password']);
+                return $data;
+            }else{
+                return FALSE;
+            }
 
-
+        } catch (PDOException $th) {
+            return NULL;
+        }
     }
 
     /**
@@ -287,7 +310,7 @@ class DataLayer{
     }
 
  function rechercher($name){
-        
+
         $sql = "SELECT * FROM product WHERE name LIKE '%$name%'";
          try {
             $result = $this->connexion->prepare($sql);
@@ -306,5 +329,21 @@ class DataLayer{
         }
 
     }
+    function getorders(){
+            $sql = "SELECT * FROM orders";
+            try {
+                $result = $this->connexion->prepare($sql);
+                $var = $result->execute();
+                $data = $result->fetchAll(PDO::FETCH_ASSOC);
+                if($data){
+                    return $data;
+                }else{
+                    return FALSE;
+                }
+
+            } catch (PDOException $th) {
+                return NULL;
+            }
+        }
 
 }

@@ -12,7 +12,14 @@ $url = trim($_SERVER['REQUEST_URI'],'/');//string
 $url = explode('/',$url);//tableau
 //print_r($url);
 //exit(0);
+<<<<<<< HEAD
 $route = array("produit.php","achat.php","showpanier.php","ajouter.php","authentifier.php","modifierQte.php","inscription.php","connecter.php","administration.php","deconnecter.php","supprimer.php","categorie.php","admin.php","authentifieradmin.php","ajouterproduit.php","recherche.php");
+=======
+$route = array("produit.php","achat.php","showpanier.php","ajouter.php","authentifier.php","modifierQte.php",
+                    "inscription.php","connecter.php","administration.php","deconnecter.php","supprimer.php",
+                    "categorie.php","admin.php","authentifieradmin.php","ajouterproduit.php","recherche.php",
+                    "modifproduit.php","dashboard.php");
+>>>>>>> 1a57914376f579ff20bb284b5e7cee635a698683
 $tabcategory=array();
 foreach ($category as $key => $value) {
   array_push($tabcategory,$key);

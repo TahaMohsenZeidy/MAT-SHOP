@@ -93,7 +93,7 @@
 							  
 								<input size='30' type="text" name="recherche" class=" auto-save form-control"   placeholder="Rechercher un produit " ></li>
 								
-								<li><button class='btn btn-danger' style="width: 60px " type="submit"><i class="fa fa-search"  aria-hidden="true"></i></button>
+								<li><button class='btn btn-danger' style="width: 60px; background: #fe4c50" type="submit"><i class="fa fa-search"  aria-hidden="true"></i></button>
 								</li>
 							    </form>
 							</ul>
