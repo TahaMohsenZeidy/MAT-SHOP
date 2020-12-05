@@ -8,8 +8,7 @@
 <div class="super_container">
 <?php echo $content; ?>
 </div>
-<?php include"footer.php"?>
-
+<?php include("footer.php"); ?>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="styles/bootstrap4/popper.js"></script>
 <script src="styles/bootstrap4/bootstrap.min.js"></script>

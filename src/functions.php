@@ -195,11 +195,11 @@ function showpanier(){
       <tr>
         <th scope="col">#</th>
         <th scope="col">Nom</th>
-        <th scope="col">Description</th>
-        <th scope="col">Image</th>
+        <th scope="col" width="500px">Description</th>
+        <th scope="col" width="300px">Image</th>
         <th scope="col">Prix</th>
         <th scope="col">Quantité</th>
-        <th scope="col">Action</th>
+        <th scope="col" width="220px">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -222,13 +222,13 @@ function showpanier(){
       <td><img src=$img /></td>
   	<td>".$prix*$qte."</td>
   	<td>".$qte."
-    <form action='supprimer.php' method='post'>
-    <button type='submit' class='btn btn-success' name='supp' value=$key  >supprimer</button>
-    </form>
     </td>
     <td>
-    <form action='achat.php' method='post'>
+    <form style=".'float:right; padding:1 0px;'." action='achat.php' method='post'>
     <button type='submit' class='btn btn-success' name='id1' value=$id  >acheter</button>
+    </form>
+    <form style=".'float:right; padding:10px;'." action='supprimer.php' method='post'>
+    <button type='submit' class='btn btn-success' name='supp' value=$key  >supprimer</button>
     </form>
     </td>
     </tr>";
