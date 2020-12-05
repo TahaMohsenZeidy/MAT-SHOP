@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php require_once('head.php'); ?>
+<?php require_once('head.php'); 
 
+?>
 <body>
     <div style="padding: 160px;" class="super_container">
         <!-- Header -->
@@ -13,15 +14,12 @@
                     <h5>Product Category</h5>
                 </div>
                 <ul class="sidebar_categories">
-                    <li><a href="#">Men</a></li>
-                    <li class="active"><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>Women</a></li>
-                    <li><a href="#">Accessories</a></li>
-                    <li><a href="#">New Arrivals</a></li>
-                    <li><a href="#">Collection</a></li>
-                    <li><a href="#">Shop</a></li>
+                    <li class="active"><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>Offres</a></li>
+                    <?php foreach($category as $id => $name): ?>
+                        <li><a href="<?php echo $id + 1; ?>"><?php echo $name['name']; ?></a></li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
-
             <!-- Price Range Filtering -->
             <div class="sidebar_section">
                 <div class="sidebar_title">

@@ -12,15 +12,13 @@ $url = trim($_SERVER['REQUEST_URI'],'/');//string
 $url = explode('/',$url);//tableau
 //print_r($url);
 //exit(0);
-$route = array("produit.php","achat.php","showpanier.php","ajouter.php","authentifier.php","modifierQte.php",
-                    "inscription.php","connecter.php","administration.php","deconnecter.php","supprimer.php",
-                    "categorie.php","admin.php","authentifieradmin.php","ajouterproduit.php","recherche.php"  );
+$route = array("produit.php","achat.php","showpanier.php","ajouter.php","authentifier.php","modifierQte.php","inscription.php","connecter.php","administration.php","deconnecter.php","supprimer.php","categorie.php","admin.php","authentifieradmin.php","ajouterproduit.php","recherche.php");
 $tabcategory=array();
 foreach ($category as $key => $value) {
-  array_push($tabcategory,$value["id"]);
+  array_push($tabcategory,$key);
 }
-//print_r($tabcategory);
-//exit(0);
+// print_r($tabcategory);
+// exit(0);
     // controller
 		if(!isset($url[1]) ){//accede directement a la page d'accueil
 			include"new_acc.php";//afficher seullement page accueil

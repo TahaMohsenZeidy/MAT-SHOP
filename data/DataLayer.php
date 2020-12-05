@@ -248,10 +248,10 @@ class DataLayer{
                 $sql .= ' LIMIT '.$limit;
             }
             //print_r($sql);exit();
-
             $result = $this->connexion->prepare($sql);
             $var = $result->execute();
             $data = $result->fetchAll(PDO::FETCH_ASSOC);
+            //print_r($data);exit();
             if($data){
                 return $data;
             }else{
@@ -307,13 +307,4 @@ class DataLayer{
 
     }
 
-
-
-
-
-
-
-
 }
-
-?>

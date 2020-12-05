@@ -223,22 +223,27 @@ function categorie(){
   error_reporting(0);
   session_start();
     if(!isset($_SESSION['panier'])){
-  	                                 $tab=array();
-                                     //echo"<br><br><br><br><br> non";
-                                     //print_r($_SESSION);
-  	                                 $_SESSION['panier']=$tab;
-  									                 $_SESSION['size']=0;
-                                         }else{
-  										   if(isset($_POST['id'])){
-                          // echo"<br><br><br><br><br> oui";
-                           print_r($_POST);
-  									   array_push($_SESSION["panier"],$_POST["id"]);
-  									  // print_r($_SESSION["panier"]);
-  									   $_SESSION['size']=$_SESSION['size']+1;}}
-
-  $data=$model->getProduct(null,$url[1]);
-  //print_r($data);
-  //exit(0);
+  	  $tab=array();
+      //echo"<br><br><br><br><br> non";
+      //print_r($_SESSION);
+  	  $_SESSION['panier']=$tab;
+  		$_SESSION['size']=0;
+    }
+    else{
+  		if(isset($_POST['id'])){
+        // echo"<br><br><br><br><br> oui";
+        print_r($_POST);
+  			array_push($_SESSION["panier"],$_POST["id"]);
+  			// print_r($_SESSION["panier"]);
+        $_SESSION['size']=$_SESSION['size']+1;
+      }
+    }
+  $data=$model->getProduct(null,$url[1],null);
+  
+  // echo "<pre>";
+  // var_dump($data);
+  // echo "</pre>";
+  // exit(0);
   //print_r($data);
   $resultat="";
   foreach ($data as $key => $value){
