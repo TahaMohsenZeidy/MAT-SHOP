@@ -363,19 +363,19 @@ session_start();
 
 global $model;
 $data=$model->rechercher($_POST['recherche']);
+if(empty($data)){
+  $resultat="<br></br><br></br>
+  <div style='margin-left:350px;'>
 
-foreach ($data as $key => $value){
-  if(empty($data)){
-  $resultat="<br></br><br></br><br></br>
-  <div>
-
-  <h2> Oups ! Aucun résultat disponible </h2></br>
+  <h2> <h2 style='color:#fe4c50;'> Oups !<h2> Aucun résultat disponible </h2></br>
   <h4>- Vérifiez que vous n'avez pas fait de faute de frappe </h4>
   <h4>- Essayez avec un autre mot clé ou synonyme</h4>
   </div>
   ";
-  }
-  else{
+return $resultat;}
+else {
+foreach ($data as $key => $value){
+  
   $prix=$value["price"];
   $name=$value["name"];
   $id=$value["id"];
@@ -422,14 +422,15 @@ foreach ($data as $key => $value){
 
 </style>
            ";
-}
-
 
 }
 return "
 <div class='row' style='margin-left:150px;' >
       <div class='col' >
           <div class='product-grid' data-isotope='{ 'itemSelector': '.product-item', 'layoutMode': 'fitRows' }>".$resultat."</div> </div></div> ";
+        
+}
+
 
 }
 
