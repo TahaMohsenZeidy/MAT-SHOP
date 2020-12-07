@@ -290,7 +290,7 @@ function categorie(){
       }
     }
   $data=$model->getProduct(null,$url[1],null);
-  
+
   // echo "<pre>";
   // var_dump($data);
   // echo "</pre>";
@@ -489,5 +489,10 @@ exit(0);
 function modifproduit(){
 global $model;
 include "views/modifproduit.php";
+exit(0);
+}
+function Customers(){
+global $model;
+include "views/Customers.php";
 exit(0);
 }

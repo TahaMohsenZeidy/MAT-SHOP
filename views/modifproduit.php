@@ -119,6 +119,14 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	}]
 });
 chart.render();
+}
+
+function confirmer(){
+  //alert("Hello! I am an alert box!!");
+  var res = confirm("Êtes-vous sûr de vouloir supprimer?");
+   if(res){
+     <?php echo $model->deleteprod($_POST["supp"]); ?>
+   }
 
 }
 </script>
@@ -178,6 +186,7 @@ $resultat ="
     </tr>
   </thead>";
   foreach ($data as $key => $value) {
+    $id=$value["id"];
     $img='produit'.'/'.$value["image"];
 $resultat .="<tbody>
       <tr>
@@ -187,6 +196,9 @@ $resultat .="<tbody>
         <td>".$value["price"]."</td>
         <td>".$value["stock"]."</td>
         <td><img src=$img alt=''></td>
+        <form method='post'>
+        <td><button type='submit' name='supp' value='$id' onClick='confirmer()' class='btn btn-danger'>supprimer</button></td>
+        </form>
       </tr>
       ";
   }
@@ -196,7 +208,7 @@ $resultat .="<tbody>
 </main>
 </div>
 </div>
-    <?php include"footer.php"?>
+</div>
 
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="styles/bootstrap4/popper.js"></script>
@@ -217,6 +229,10 @@ $resultat .="<tbody>
         //print_r($_POST);
         $var=$_FILES["img"]["name"];
         $model->insertProduct($_POST["nomprod"],$_POST["description"],$_POST["aprix"],$_POST["stock"],$_POST["categ"],$var);
+      }
+      if(isset($_POST["supp"])){
+        //print_r($_POST["supp"]);
+        //echo $t;
       }
 
 
