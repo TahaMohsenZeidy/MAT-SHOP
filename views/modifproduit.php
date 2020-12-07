@@ -121,14 +121,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 chart.render();
 }
 
-function confirmer(){
-  //alert("Hello! I am an alert box!!");
-  var res = confirm("Êtes-vous sûr de vouloir supprimer?");
-   if(res){
-     <?php echo $model->deleteprod($_POST["supp"]); ?>
-   }
 
-}
 </script>
 <div class="row">
   <div id="chartContainer" style="height: 370px; width: 100%;"></div>
@@ -231,8 +224,15 @@ $resultat .="<tbody>
         $model->insertProduct($_POST["nomprod"],$_POST["description"],$_POST["aprix"],$_POST["stock"],$_POST["categ"],$var);
       }
       if(isset($_POST["supp"])){
-        //print_r($_POST["supp"]);
-        //echo $t;
+        echo "<script>
+        var res = confirm('Êtes-vous sûr de vouloir supprimer?');
+          if(res==true){
+             ". $model->deleteprod($_POST['supp']) ."
+          }
+          else{
+            //confirm('Êtes ');
+          }
+         </script>";
       }
 
 

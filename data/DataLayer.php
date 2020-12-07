@@ -310,22 +310,14 @@ class DataLayer{
     }
 
     function deleteprod($id){
-      $sql = "DELETE FROM product WHERE 'id' =$id ";
-      echo "string1";
+      $sql = "DELETE FROM product WHERE id =$id ";
       try {
-        echo "string2";
         $result = $this->connexion->prepare($sql);
-echo "string3";
         $var = $result->execute();
-        echo "string3";
         if($var){
-          echo "string4";
-        
             return TRUE;
 
         }else{
-          echo "string5";
-
             return FALSE;
         }
 
