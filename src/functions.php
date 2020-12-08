@@ -40,7 +40,11 @@ foreach ($data as $key => $value){
                 <div class='favorite favorite_left'></div>
 
                 <div class='product_info'>
-                  <h6 class='product_name'>$name </a></h6>
+
+
+                  <h6 class='product_name'><a href ='http://localhost/MVC/detail.php?id=$id'> $name </a></h6>
+
+
                   <div class='product_price'>$prix dt</div>
                 </div>
               </div>
@@ -391,7 +395,7 @@ foreach ($data as $key => $value){
                 <div class='favorite favorite_left'></div>
 
                 <div class='product_info'>
-                  <h6 class='product_name'>$name </a></h6>
+                  <h6 class='product_name'><a href ='http://localhost/MVC/detail.php?id=$id'> $name </a></h6>
                   <div class='product_price'>$prix dt</div>
                 </div>
               </div>
