@@ -35,7 +35,7 @@ foreach ($data as $key => $value){
              <div class='product-item men' style='display:inline-block; width:236.8px;'>
               <div class='product discount product_filter'>
                 <div class='product_image'>
-                  <img src=$img alt=''>
+                  <img src=$img alt='' width=225 height=225  >
                 </div>
                 <div class='favorite favorite_left'></div>
 
@@ -375,7 +375,7 @@ if(empty($data)){
 return $resultat;}
 else {
 foreach ($data as $key => $value){
-  
+
   $prix=$value["price"];
   $name=$value["name"];
   $id=$value["id"];
@@ -428,7 +428,7 @@ return "
 <div class='row' style='margin-left:150px;' >
       <div class='col' >
           <div class='product-grid' data-isotope='{ 'itemSelector': '.product-item', 'layoutMode': 'fitRows' }>".$resultat."</div> </div></div> ";
-        
+
 }
 
 

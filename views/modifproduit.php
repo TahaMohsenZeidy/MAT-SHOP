@@ -112,7 +112,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
       arsort($result);
        foreach ($result as $key => $value) {
          $a=$nom[$key];?>
-			{ y: <?php echo $value; ?>, label: <?php echo $key; ?> },
+			{ y: <?php echo $value; ?>, label: "<?php echo $a ?>" },
 			<?php $i++;
     if($i == 3){break;}  }?>
 		]
