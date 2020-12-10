@@ -363,5 +363,21 @@ class DataLayer{
                 return NULL;
             }
         }
+    
+        function getProductsByPrice($prRange){
+            $sql = "SELECT * FROM product WHERE price BETWEEN 0.0 AND :price";
+            try {
+                $result = $this->connexion->prepare($sql);
+                $result->execute(array(':price'=>$prRange));
+                $data = $result->fetchAll(PDO::FETCH_ASSOC);
+                if($data){
+                    return $data;
+                }
+                return FALSE;
+            } catch (PDOException $ex) {
+                return NULL;
+            }
+        }
+    
 
 }
