@@ -28,106 +28,15 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="categoryadmin.php">
                 <span data-feather="bar-chart-2"></span>
-                Reports
+                categorie
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="layers"></span>
-                Integrations
-              </a>
-            </li>
-          </ul>
 
-          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Saved reports</span>
-            <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-              <span data-feather="plus-circle"></span>
-            </a>
-          </h6>
-          <ul class="nav flex-column mb-2">
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="file-text"></span>
-                Current month
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="file-text"></span>
-                Last quarter
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="file-text"></span>
-                Social engagement
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="file-text"></span>
-                Year-end sale
-              </a>
-            </li>
-          </ul>
         </div>
       </nav>
-      <script>
-      <?php
-      $data=$model->getorders();
-      foreach ($data as $key => $value) {
-        $redon[$key]=$value["id_product"];
-      }
-      $result=array_count_values($redon);//[id_product]=>nbre de redon
 
-      foreach ($result as $key => $value) {
-        $oneprod=$model->getProduct(null,null,$key);
-        $nom[$key]=$oneprod[0]['name'];
-      }
-
-      ?>
-
-window.onload = function() {
-
-var chart = new CanvasJS.Chart("chartContainer", {
-	theme: "light2", // "light1", "light2", "dark1", "dark2"
-	exportEnabled: true,
-	animationEnabled: true,
-	title: {
-		text: "les 3 meilleurs produits achetés id_produit-%"
-	},
-	data: [{
-		type: "pie",
-		startAngle: 25,
-		toolTipContent: "<b>{label}</b>: {y}%",
-		showInLegend: "true",
-		legendText: "{label}",
-		indexLabelFontSize: 16,
-		indexLabel: "{label} - {y}%",
-		dataPoints: [
-      <?php $i=0;
-      arsort($result);
-       foreach ($result as $key => $value) {
-         $a=$nom[$key];?>
-			{ y: <?php echo $value; ?>, label: "<?php echo $a ?>" },
-			<?php $i++;
-    if($i == 3){break;}  }?>
-		]
-	}]
-});
-chart.render();
-}
-
-
-</script>
-<div class="row">
-  <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-</div>
-<div class="row">
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 
@@ -188,7 +97,7 @@ $resultat .="<tbody>
         <td>".$value["name"]."</td>
         <td>".$value["price"]."</td>
         <td>".$value["stock"]."</td>
-        <td><img src=$img alt=''></td>
+        <td><img src=$img alt='' width=225 height=225></td>
         <form method='post'>
         <td><button type='submit' name='supp' value='$id' onClick='confirmer()' class='btn btn-danger'>supprimer</button></td>
         </form>
@@ -199,7 +108,7 @@ $resultat .="<tbody>
 <br>
 <?php echo $resultat ?>
 </main>
-</div>
+
 </div>
 </div>
 
@@ -222,18 +131,5 @@ $resultat .="<tbody>
         //print_r($_POST);
         $var=$_FILES["img"]["name"];
         $model->insertProduct($_POST["nomprod"],$_POST["description"],$_POST["aprix"],$_POST["stock"],$_POST["categ"],$var);
-      }
-      if(isset($_POST["supp"])){
-        echo "<script>
-        var res = confirm('Êtes-vous sûr de vouloir supprimer?');
-          if(res==true){
-             ". $model->deleteprod($_POST['supp']) ."
-          }
-          else{
-            //confirm('Êtes ');
-          }
-         </script>";
-      }
-
-
-      ?>
+      }?>
+      <?php if(isset($_POST["supp"])){$model->deleteprod($_POST['supp']);}?>

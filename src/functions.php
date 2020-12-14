@@ -310,7 +310,7 @@ function categorie(){
   		<div class='card-body'>
             <h5 class='card-title'></h5>
   <form  action='' method='post'>
-            <a href='' class='btn btn-primary'>Détails</a>
+            <a href='http://localhost/MVC/detail.php?id=$id' class='btn btn-primary'>Détails</a>
             <button type='submit' class='btn btn-danger' name='id' value=$id>add</button>
 
   </form>
@@ -556,5 +556,15 @@ exit(0);
 function Customers(){
 global $model;
 include "views/Customers.php";
+exit(0);
+}
+function categoryadmin(){
+global $model;
+include "views/categoryadmin.php";
+exit(0);
+}
+function achatadmin(){
+global $model;
+include "views/achatadmin.php";
 exit(0);
 }

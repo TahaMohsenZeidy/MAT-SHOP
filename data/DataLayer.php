@@ -117,14 +117,30 @@ class DataLayer{
         }
 
     }
+    function insertCategory($name){
+      $sql = "INSERT INTO category ( name) VALUES (:name)";
+      try {
+          $result = $this->connexion->prepare($sql);
+          $var = $result->execute(array(
+              ':name' => $name
+          ));
+          if($var){
+              return TRUE;
+          }else{
+              return FALSE;
+          }
+          exit(0);
+      } catch (PDOException $th) {
+          return NULL;
+      }
+
+    }
 
     function insertProduct($name,$description,$price,$stock,$category,$image){
       $sql = "INSERT INTO product ( name, description, price, stock , category, image) VALUES
       (:name,:description,:price,:stock,:category,:image)";
       try {
-        echo"s1";
           $result = $this->connexion->prepare($sql);
-          echo "string2";
           $var = $result->execute(array(
               ':name' => $name,
               ':description'=>$description,
@@ -133,15 +149,11 @@ class DataLayer{
               ':category' => $category,
               ':image' => $image
           ));
-          echo "string3";
           if($var){
-            echo "string4";
               return TRUE;
           }else{
-            echo "string5";
               return FALSE;
           }
-          exit(0);
       } catch (PDOException $th) {
           return NULL;
       }
@@ -217,9 +229,11 @@ class DataLayer{
      * @return FALSE dans le cas d'echec
      * @return NULL s'il y a une exception déclenchée
      */
-    function getCustomer(){
+    function getCustomer($id=NULL){
         $sql = "SELECT * FROM customers ";
         try {
+              if(!is_null($id)){
+                  $sql .= ' WHERE id = '.$id;}
             $result = $this->connexion->prepare($sql);
             $var = $result->execute();
             $data = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -308,6 +322,23 @@ class DataLayer{
             return $th;
         }
     }
+    function deletecategory($id){
+      $sql = "DELETE FROM category WHERE id =$id ";
+      try {
+        $result = $this->connexion->prepare($sql);
+        $var = $result->execute();
+        print_r ($var);
+        if($var){
+            return TRUE;
+
+        }else{
+            return FALSE;
+        }
+
+      } catch (\Exception $e) {
+        return NULL;
+      }
+    }
 
     function deleteprod($id){
       $sql = "DELETE FROM product WHERE id =$id ";
@@ -363,7 +394,7 @@ class DataLayer{
                 return NULL;
             }
         }
-    
+
         function getProductsByPrice($prRange){
             $sql = "SELECT * FROM product WHERE price BETWEEN 0.0 AND :price";
             try {
@@ -378,6 +409,6 @@ class DataLayer{
                 return NULL;
             }
         }
-    
+
 
 }

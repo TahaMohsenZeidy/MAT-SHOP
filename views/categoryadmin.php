@@ -36,41 +36,57 @@
 
         </div>
       </nav>
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+                 <h2 class="h2">Ajouter des categories</h2>
+        </div>
+               <form  method="post" enctype="multipart/form-data">
+                  <div class="row mb-3">
+                      <div class="col">
+                        <input type="text" name="name" class="form-control" placeholder="nom du categorie">
+                  </div>
+                  <div class="col">
+                  <input type="submit" name="submit" value="ajouter" class="btn btn-primary">
+                </div>
+              </form>
+
+
+<br>
 <?php
-$data=$model->getCustomer();
 $resultat ="
-<h2 class='h2'>Table des clients</h2>
 <div class='col-sm'>
+<h2 class='h2'>Table des categories</h2>
 <div class='mx-auto' style='width: 1000px;'>
 <table class='table table-dark'>
   <thead>
     <tr>
       <th scope='col'>#</th>
       <th scope='col'>id</th>
-      <th scope='col'>firstname</th>
-      <th scope='col'>lastname</th>
-      <th scope='col'>telephone</th>
-      <th scope='col'>email</th>
+      <th scope='col'>nom du categorie</th>
     </tr>
   </thead>";
+  $data=$model->getCategory();
   foreach ($data as $key => $value) {
-    $img='produit'.'/'.$value["image"];
+    $id=$value["id"];
 $resultat .="<tbody>
       <tr>
         <th scope='row'>".$key=($key+1)."</th>
         <td>".$value["id"]."</td>
-        <td>".$value["firstname"]."</td>
-        <td>".$value["lastname"]."</td>
-        <td>".$value["tel"]."</td>
-        <td>".$value["email"]."</td>
+        <td>".$value["name"]."</td>
+        <form method='post'>
+        <td><button type='submit' name='supp' value='$id' onClick='confirmer()' class='btn btn-danger'>supprimer</button></td>
+        </form>
       </tr>
       ";
   }
   $resultat .="</tbody></table></div></div>";?>
 <br>
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+<div class="row mb-3">
 <?php echo $resultat ?>
+</div>
 </main>
+</div>
 </div>
 </div>
 
@@ -84,3 +100,26 @@ $resultat .="<tbody>
     </body>
 
     </html>
+
+      <?php
+      if(isset($_POST["submit"])) {
+        $model->insertCategory($_POST["name"]);
+        header( "Location: categoryadmin.php" );
+        exit(0);
+      }
+      if(isset($_POST["supp"])){
+        echo "<script>
+        var res = confirm('Êtes-vous sûr de vouloir supprimer  ?');
+          if(res==true){
+             ". $model->deletecategory($_POST['supp']) ."
+          }
+          else{
+            //confirm('Êtes ');
+          }
+         </script>";
+         header( "Location: categoryadmin.php" );
+         exit(0);
+      }
+
+
+      ?>

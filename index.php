@@ -15,12 +15,13 @@ $url = explode('/',$url);//tableau
 $route = array("produit.php","achat.php","showpanier.php","ajouter.php","authentifier.php","modifierQte.php",
                     "inscription.php","connecter.php","administration.php","deconnecter.php","supprimer.php",
                     "categorie.php","admin.php","authentifieradmin.php","ajouterproduit.php","recherche.php",
-                    "modifproduit.php","dashboard.php","Customers.php", "getPriceRange.php");
+                    "modifproduit.php","dashboard.php","Customers.php", "getPriceRange.php","categoryadmin.php",
+                  "achatadmin.php",);
 $tabcategory=array();
 foreach ($category as $key => $value) {
   array_push($tabcategory,$key);
 }
-// print_r($tabcategory);
+ //print_r($tabcategory);
 // exit(0);
     // controller
 		if(!isset($url[1]) ){//accede directement a la page d'accueil

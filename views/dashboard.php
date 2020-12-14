@@ -29,51 +29,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="categoryadmin.php">
               <span data-feather="bar-chart-2"></span>
-              Reports
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="layers"></span>
-              Integrations
+              catégories
             </a>
           </li>
         </ul>
 
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Saved reports</span>
-          <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-            <span data-feather="plus-circle"></span>
-          </a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Current month
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Last quarter
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Social engagement
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Year-end sale
-            </a>
-          </li>
-        </ul>
       </div>
     </nav>
 
@@ -81,7 +43,6 @@
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h2 class="h2">Dashboard</h2>
       </div>
-      <h1 class="h2">ventes/mois<h1>
       <?php //include "../head.php";
       //include "../data/DataLayer.php";
       //$model=new DataLayer();//instance de DataLayer
@@ -153,10 +114,6 @@
           if($rest=='12'){
       			$a12++;
       		}
-
-
-
-
           $resultat .="<tbody>
             <tr>
               <th scope='row'>".$key=($key+1)."</th>
@@ -174,57 +131,149 @@
 
       ?>
       <script type="text/javascript">
-        window.onload = function () {
-          var chart = new CanvasJS.Chart("chartContainer",
-          {
+window.onload = function () {
 
-            axisX:{
-             title: "mois",
-             gridThickness: 1,
-             tickLength: 10
-            },
+var chart = new CanvasJS.Chart("chartContainer1", {
+	animationEnabled: true,
+	exportEnabled: true,
+	theme: "light1", // "light1", "light2", "dark1", "dark2"
+	title:{
+		text: "nombre de ventes par mois",
+    horizontalAlign: "left"
+	},
+  	axisY: {
+      includeZero: true
+    },
+	data: [{
+		type: "column", //change type to bar, line, area, pie, etc
+		//indexLabel: "{y}", //Shows y value on all Data Points
+		indexLabelFontColor: "#5A5757",
+      	indexLabelFontSize: 16,
+		indexLabelPlacement: "outside",
+		dataPoints: [
 
-            data: [
-            {
-              type: "column",
-              dataPoints: [
-              { x: 1, y: <?php echo $a1; ?> },
-              { x: 2, y: <?php echo $a2; ?>},
-              { x: 3, y: <?php echo $a3; ?> },
-              { x: 4, y: <?php echo $a4; ?> },
-              { x: 5, y: <?php echo $a5; ?> },
-              { x: 6, y: <?php echo $a6; ?> },
-              { x: 7, y: <?php echo $a7; ?> },
-              { x: 8, y: <?php echo $a8; ?> },
-              { x: 9, y: <?php echo $a9; ?>},
-      				{ x: 10, y: <?php echo $a10; ?>},
-      				{ x: 11, y: <?php echo $a11; ?>},
-      				{ x: 12, y: <?php echo $a12; ?>},
-              ]
-            }
-            ]
-          });
+			{ x:  1 , y: <?php echo $a1 ?> },
+			{ x: 2, y: <?php echo $a2 ?> },
+			{ x: 3, y: <?php echo $a3 ?> },
+			{ x: 4, y: <?php echo $a4 ?> },
+			{ x: 5, y: <?php echo $a5 ?> },
+			{ x: 6, y: <?php echo $a6 ?> },
+			{ x: 7, y: <?php echo $a7 ?> },
+			{ x: 8, y: <?php echo $a8 ?>, indexLabel: "\u2605 Highest" },
+			{ x: 9, y: <?php echo $a9 ?> },
+			{ x: 10, y: <?php echo $a10 ?> },
+			{ x: 11, y: <?php echo $a11 ?> },
+			{ x: 12, y: <?php echo $a12 ?>,indexLabel: "\u2691 Lowest" },
 
-          chart.render();
-        }
+		]
+	}]
+});
+chart.render();
+
+
+<?php
+$data=$model->getorders();
+foreach ($data as $key => $value) {
+  $redon[$key]=$value["id_product"];
+  $redonclient[$key]=$value["id_customers"];
+}
+$result=array_count_values($redon);//[id_product]=>nbre de redon
+$resultclient=array_count_values($redonclient);
+foreach ($result as $key => $value) {
+  $oneprod=$model->getProduct(null,null,$key);
+  $nom[$key]=$oneprod[0]['name'];
+}
+foreach ($resultclient as $key => $value) {
+  $clientt=$model->getCustomer($key);
+  $nomclient[$key]=$clientt[0]['firstname'];
+}
+?>
+
+
+var chart = new CanvasJS.Chart("chartContainer2", {
+theme: "light1", // "light1", "light2", "dark1", "dark2"
+exportEnabled: true,
+animationEnabled: true,
+title: {
+text: "les meilleurs produits achetés ",
+horizontalAlign: "left"
+},
+data: [{
+type: "pie",
+startAngle: 25,
+toolTipContent: "<b>{label}</b>: {y}%",
+showInLegend: "true",
+legendText: "{label}",
+indexLabelFontSize: 16,
+indexLabel: "{label} - {y}%",
+dataPoints: [
+<?php $i=0;
+arsort($result);
+ foreach ($result as $key => $value) {
+   $a=$nom[$key];?>
+{ y: <?php echo $value; ?>, label: "<?php echo $a ?>" },
+<?php $i++;
+if($i == 3){break;}  }?>
+]
+}]
+});
+chart.render();
+var chart = new CanvasJS.Chart("chartContainer3", {
+	animationEnabled: true,
+	title:{
+		text:"les clients fideles",
+		horizontalAlign: "left"
+	},
+	data: [{
+		type: "doughnut",
+		startAngle: 60,
+		//innerRadius: 60,
+		indexLabelFontSize: 17,
+		indexLabel: "{label} - #percent%",
+		toolTipContent: "<b>{label}:</b> {y} (#percent%)",
+		dataPoints: [
+      <?php $i=0;
+      arsort($resultclient);
+       foreach ($resultclient as $key => $value) {
+         $n=$nomclient[$key];?>
+			{ y: <?php echo $value; ?>, label: '<?php echo "id:".$key." ".$n ?>' },
+			<?php $i++;
+    if($i == 3){break;}}?>
+		]
+	}]
+});
+chart.render();
+}
 
         </script>
         <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <?php $id=2; ?>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div id="chartContainer1" style="height: 370px; width: 900px;"></div>
+              <h3 class='product_name'><a href ='http://localhost/MVC/achatadmin.php'>voir et modifier les produits  </a></h3>            </div>
+            <br>
 
-
-
-        <div id="chartContainer" style="height: 300px; max-width: 920px; margin: 0px auto;"></div>
-
-
-
-      <br>
-      <h1 class="h2">tableau des commandes</h1>
-      <?php echo $resultat;?>
+          </div>
+          <div class="row">
+    <div class="col">
+      <div id="chartContainer3" style="height: 370px; width: 100%;"></div>
+      <h3 class='product_name'><a href ='http://localhost/MVC/Customers.php'>voir les clients  </a></h3>
+      <br><br>
+         </div>
+         <div class="col">
+           <div id="chartContainer2" style="height: 370px; width: 100%;"></div>
+           <h3 class='product_name'><a href ='http://localhost/MVC/modifproduit.php'>voir et modifier les produits  </a></h3>
+         <br>
+         </div>
+          </div>
+        </div>
 
     </main>
   </div>
 </div>
-
+<?php //print_r($nom); ?>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="styles/bootstrap4/popper.js"></script>
 <script src="styles/bootstrap4/bootstrap.min.js"></script>
