@@ -1,5 +1,7 @@
 <!-- Header -->
-
+<?php if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+} ?>
 	<header class="header trans_300">
 		<div class="top_nav">
 			<div class="container">
@@ -7,9 +9,8 @@
 					<div class="col-md-6">
 						<div class="top_nav_left">
 							<?php
-							error_reporting(0);
-							session_start();
-							if(isset($_SESSION )){
+              //print_r($_SESSION);
+							if(isset($_SESSION["connect"] )){
 								$msg="welcome ".$_SESSION["nom"];
 							}else{
 								$msg="";
@@ -49,19 +50,19 @@
 									</ul>
 								</li>
 								<li class="account">
-									<a href="#">
+									<a href="account.php">
 										My Account
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="account_selection">
-										<?php if(empty($_SESSION)):?>
+										<?php if(empty($_SESSION["connect"])):?>
 										<li><a href="connecter.php"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
 										<?php endif; ?>
 										<?php
-										 if(empty($_SESSION)):   ?>
+										 if(empty($_SESSION["connect"])):   ?>
 										<li><a href="inscription.php"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
 										<?php endif; ?>
-										<?php if(!empty($_SESSION)):?>
+										<?php if(isset($_SESSION["connect"])):?>
 										<li><a href="deconnecter.php"><i class="fa fa-user" aria-hidden="true"></i>Sign out</a></li>
 										<?php endif; ?>
 									</ul>
@@ -85,20 +86,20 @@
 						<nav class="navbar">
 							<ul class="navbar_menu">
 								<li><a href="<?php echo "http://localhost/MVC/"; ?>">Home</a></li>
-								
+
 								<li><a href="produit.php">Produits</a></li>
 								<li><a href="">Promotion</a></li>
 								<li><a href="contact.php">Contact</a></li>
 								<li> <form method="post" action="recherche.php">
-							  
+
 								<input size='30' type="text" name="recherche" class=" auto-save form-control"   placeholder="Rechercher un produit " ></li>
-								
+
 								<li><button class='btn btn-danger' style="width: 60px; background: #fe4c50" type="submit"><i class="fa fa-search"  aria-hidden="true"></i></button>
 								</li>
 							    </form>
 							</ul>
 							<ul class="navbar_user">
-								
+
 
 								<li class="checkout">
 									<a href="showpanier.php">

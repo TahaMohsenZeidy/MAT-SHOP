@@ -1,9 +1,9 @@
 <?php
 require"head.php";
-
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 function produit(){
-error_reporting(0);
-session_start();
   if(!isset($_SESSION['panier'])){
 	                                 $tab=array();
                                    //echo"<br><br><br><br><br> non";
@@ -130,7 +130,7 @@ function ajouter (){
 $email = $_POST["email"];
 $password = $_POST["password"];
 $data = $model->createCustomers($firstname,$email,$password);
-session_start();
+//session_start();
 if(isset($data)){
 $_SESSION["nom"]=$firstname;
 $_SESSION["email"]=$email;
@@ -145,7 +145,7 @@ function deconnecter(){
 }
 
 function connecter(){
-  $resultat="<br><br><br><br>
+  $resultat="<br><br>
   <div class='mx-auto' style='width: 500px;'>
   <form  action='authentifier.php' method='post'>
 
@@ -180,21 +180,25 @@ $password = $_POST["password"];
 $data=$model->authentifier($email,$password);}
 if(isset ($data)){
 if($data){
-session_start();
+//session_start();
 $_SESSION["nom"]=$data["firstname"];
 $_SESSION["email"]=$data["email"];
 $_SESSION["connect"]="oui";
 print_r($_SESSION);
 //exit(0);
 Header("Location:/MVC");
-}}
+}
+else{
+  Header("Location:/MVC/connecter.php");
+}
+}
 }
 
 function showpanier(){
   //tr :ligne
   global $model;
-  ini_set( "display_errors", 0);
-  session_start();
+  //ini_set( "display_errors", 0);
+  //session_start();
   $result = '<table class="table">
     <thead class="thead-dark">
       <tr>
@@ -224,7 +228,7 @@ function showpanier(){
       <th scope='row'>".$table['id']."</th>
       <td>".$table['name']."</td>
       <td>".$table['description']."</td>
-      <td><img src=$img /></td>
+      <td><img src=$img width=225 height=225 /></td>
   	<td>".$prix*$qte."</td>
   	<td>".$qte."
     </td>
@@ -250,17 +254,27 @@ return $result;
 }
 
 function achat(){
-  session_start();
+  //session_start();
   global $model;
-//  print_r($_POST["id1"]);
-  $data=$model->getProduct(null,null,$_POST["id1"]);
   $email=$_SESSION["email"];
   $tab=$model->getoneCustomer($email);
-  $idCustomers=$tab["0"]["id"];
-  $idprod=$data["0"]["id"];
-  //print_r($_SESSION);
-  $t=$model->createOrders($idCustomers,$idprod,"1",$data["0"]["price"]);
-  Header("Location:/MVC/showpanier.php");
+  $idCustomer=$tab[0]["id"];
+  $infoclient=$model->getCustomer($idCustomer);
+  //print_r($infoclient);
+  if($_SESSION["connect"]!="oui" ){
+     Header("Location:/MVC/connecter.php");
+  }
+  elseif(isset($infoclient["tel"]) && isset($infoclient["lastname"]) && isset($infoclient["adresse"])){
+    Header("Location:/MVC/updateprofil.php");
+  }
+
+  else{
+    $data=$model->getProduct(null,null,$_POST["id1"]);
+    $idprod=$data["0"]["id"];
+    $t=$model->createOrders($idCustomer,$idprod,"1",$data["0"]["price"]);
+    Header("Location:/MVC/showpanier.php");
+  }
+
 }
 
 function supprimer(){
@@ -276,8 +290,8 @@ function supprimer(){
 function categorie(){
   global $url;
   global $model;
-  error_reporting(0);
-  session_start();
+  //error_reporting(0);
+  //session_start();
     if(!isset($_SESSION['panier'])){
   	  $tab=array();
       //echo"<br><br><br><br><br> non";
@@ -349,8 +363,8 @@ function newsletter(){
   Header('Location:/MVC/contact.php');
 }
 function recherche(){
-error_reporting(0);
-session_start();
+//error_reporting(0);
+//session_start();
   if(!isset($_SESSION['panier'])){
                                    $tab=array();
                                    //echo"<br><br><br><br><br> non";
@@ -498,7 +512,7 @@ return "
 /*******profil du client *****/
 function account(){
 global $model;
-session_start();
+//session_start();
 $mail=$_SESSION["email"];
 $data=$model->getoneCustomer($mail);
     if($data[0]["sexe"]==1){
@@ -531,7 +545,7 @@ $data=$model->getoneCustomer($mail);
 }
 function updateprofil(){
   global $model;
-  session_start();
+  //session_start();
   $mail=$_SESSION["email"];
   $data=$model->getoneCustomer($mail);
   print_r($data);
@@ -577,7 +591,7 @@ function updateprofil(){
 </form>
 </div>
   ';
-
+return $result;
 }
 function updateAction(){
   //Header("Location:/MVC/updateprofil.php");
