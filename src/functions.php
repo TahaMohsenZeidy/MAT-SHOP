@@ -184,7 +184,8 @@ session_start();
 $_SESSION["nom"]=$data["firstname"];
 $_SESSION["email"]=$data["email"];
 $_SESSION["connect"]="oui";
-//print_r($_SESSION);
+print_r($_SESSION);
+//exit(0);
 Header("Location:/MVC");
 }}
 }
@@ -494,7 +495,105 @@ return "
   </div>
 </div> ";
 }
+/*******profil du client *****/
+function account(){
+global $model;
+session_start();
+$mail=$_SESSION["email"];
+$data=$model->getoneCustomer($mail);
+    if($data[0]["sexe"]==1){
+      $data[0]["sexe"] = "Masculin";
+    }else{
+      $data["0"]["sexe"] = "Féminin";
+    }
 
+//print_r($data);
+  $result = '
+  <div class="mx-auto" style="width: 500px;">
+
+  <ul class="list-group">
+  <li class="list-group-item active">Bienvenu sur votre Profil '.$data[0]["firstname"].'</li>
+  <li class="list-group-item"> Sexe : '.$data[0]["sexe"].'</li>
+  <li class="list-group-item"> Nom : '.$data[0]["lastname"].'</li>
+  <li class="list-group-item"> Prénom : '.$data[0]["firstname"].'</li>
+  <li class="list-group-item"> Email : '.$data[0]["email"].'</li>
+  <li class="list-group-item"> telephone : '.$data[0]["tel"].'</li>
+  <li class="list-group-item"> Adresse Livraison : '.$data[0]["adresse"].'</li>
+</ul>
+
+
+  <div class="mt-2">
+  <a href="updateprofil.php" class="btn btn-success">Mettre à jour mes données</a>
+  </div>
+  </div>
+  ';
+  return $result;
+}
+function updateprofil(){
+  global $model;
+  session_start();
+  $mail=$_SESSION["email"];
+  $data=$model->getoneCustomer($mail);
+  print_r($data);
+  $result = '
+  <div class="mx-auto" style="width: 500px;">
+  <form action="updateAction.php" method="post">
+      <div class="form-row">
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Sexe</label>
+        </div>
+        <select name="sexe" class="custom-select" id="inputGroupSelect01">
+          <option selected>Choose...</option>
+          <option value="1">Masculin</option>
+          <option value="2">Féminin</option>
+        </select>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputEmail4">Nom </label>
+      <input type="text" name="firstname" value="'.$data[0]["firstname"].'" class="form-control" id="inputEmail4">
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputPassword4">Prénom </label>
+      <input type="text" name="lastname" value="'.$data[0]["lastname"].'" class="form-control" id="inputPassword4">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Email </label>
+      <input type="text" name="email" value="'.$data[0]["email"].'" class="form-control" id="inputPassword4">
+    </div>
+
+  </div>
+  <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Adresse de Livraison </label>
+        <input type="text" name="adresse_livraison" value="'.$data[0]["adresse"].'" class="form-control" id="inputPassword4">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Téléphone </label>
+        <input type="text" name="tel" value="'.$data[0]["tel"].'" class="form-control" id="inputPassword4">
+      </div>
+</div>
+<input type="submit" name="update" class="btn btn-primary">
+</form>
+</div>
+  ';
+
+}
+function updateAction(){
+  //Header("Location:/MVC/updateprofil.php");
+  //print_r($_POST);
+  global $model;
+  $data=$model->getoneCustomer($_POST["email"]);
+  $_POST["id"]=$data[0]["id"];
+  $r = $model->updateInfosCustomer($_POST);
+if($r){
+  $resultat = '<p class="btn btn-success btn-block">Mise à jour réussie</p>';
+}else{
+  $resultat = '<p class="btn btn-danger btn-block">Mise à jour échouée</p>';
+}
+Header("Location:/MVC/account.php");
+//return $resultat;
+}
 
 /************     partie admin    *******************/
 function admin(){

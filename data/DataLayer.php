@@ -171,28 +171,28 @@ class DataLayer{
      */
     // exemple de paramètre array('pseudo'=>'jean','firstname'=>'DUPONT')
     function updateInfosCustomer($newInfos){
-        $sql = "UPDATE 'customers' SET ";
-        $id = $newInfos["id"];
-        unset($newInfos["id"]);
-        try {
-            foreach($newInfos as $key => $value){
-                $value = addslashes($value);
-                $sql .= " $key = '$value' ,";
-            }
-            $sql = substr($sql,0,-1);
-            $sql .= " WHERE id = :id";
-            //print_r($sql); exit();
-            $result = $this->connexion->prepare($sql);
-            $var = $result->execute(array('id'=>$id));
-
-            if($var){
-                return TRUE;
-            }else{
-                return FALSE;
-            }
-        } catch (PDOException $th) {
-            return NULL;
+      //print_r($newInfos);
+    $id=$newInfos["id"];
+    $sexe=$newInfos["sexe"];
+    $firstname=$newInfos["firstname"];
+    $lastname=$newInfos["lastname"];
+    $email=$newInfos["email"];
+    $adresse=$newInfos["adresse_livraison"];
+    $tel=$newInfos["tel"];
+    $sql="UPDATE customers SET sexe='$sexe' ,firstname='$firstname',lastname='$lastname',tel='$tel' ,
+    adresse='$adresse' WHERE id=$id ";
+    try {
+        $result = $this->connexion->prepare($sql);
+        $var = $result->execute();
+        if($var){
+            return TRUE;
+        }else{
+            return FALSE;
         }
+
+    } catch (PDOException $th) {
+        return NULL;
+    }
 
     }
 
