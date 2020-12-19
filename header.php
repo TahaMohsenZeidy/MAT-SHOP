@@ -11,6 +11,7 @@
 							<?php
               //print_r($_SESSION);
 							if(isset($_SESSION["connect"] )){
+                //print_r($_SESSION);
 								$msg="welcome ".$_SESSION["nom"];
 							}else{
 								$msg="";

@@ -213,9 +213,10 @@ function showpanier(){
     </thead>
     <tbody>
   ';
-  $redon=(array_count_values($_SESSION['panier']));//qte de chaque id
+  $redon=(array_count_values($_SESSION['panier']));//qte de chaque id; id=>qte
   $unique = array_unique((array)$_SESSION['panier']);//nbr de id sans redon
    $total_price = 0;
+   $_SESSION["total"]=array();
   foreach($unique as $key => $value){
   	$data = $model->getProduct(null,null,$value);
       $table=$data[0];
@@ -234,6 +235,7 @@ function showpanier(){
     </td>
     <td>
     <form style=".'float:right; padding:1 0px;'." action='achat.php' method='post'>
+    <input type='hidden' name='qte' value=$qte />
     <button type='submit' class='btn btn-success' name='id1' value=$id  >acheter</button>
     </form>
     <form style=".'float:right; padding:10px;'." action='supprimer.php' method='post'>
@@ -241,6 +243,7 @@ function showpanier(){
     </form>
     </td>
     </tr>";
+    array_push($_SESSION["total"],$qte);
     $total_price +=  $table["price"]*$redon[$value];
 
   }
@@ -268,15 +271,23 @@ function achat(){
     Header("Location:/MVC/updateprofil.php");
   }
 
-  else{
+  elseif(isset($_POST["id1"])){
     $data=$model->getProduct(null,null,$_POST["id1"]);
     $idprod=$data["0"]["id"];
-    $t=$model->createOrders($idCustomer,$idprod,"1",$data["0"]["price"]);
+    $t=$model->createOrders($idCustomer,$idprod,$_POST["qte"],$data["0"]["price"]*$_POST["qte"]);
     Header("Location:/MVC/showpanier.php");
   }
+  else{
+    $total=array_count_values($_SESSION['panier']);//id=>qte
+    foreach ($total as $key => $value) {
+      $data=$model->getProduct(null,null,$key);
+      $idprod=$data["0"]["id"];
+      $t=$model->createOrders($idCustomer,$idprod,$value,$data["0"]["price"]*$value);
+      Header("Location:/MVC/showpanier.php");
+    }
 
+  }
 }
-
 function supprimer(){
   session_start();
   unset($_SESSION["panier"][$_POST["supp"]]);
