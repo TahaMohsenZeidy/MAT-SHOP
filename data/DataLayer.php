@@ -315,6 +315,22 @@ class DataLayer{
             return NULL;
         }
     }
+    function getpassword($email){
+        $sql = "SELECT * FROM customers WHERE email = '$email' ";
+        try {
+            $result = $this->connexion->prepare($sql);
+            $var = $result->execute();
+            $data = $result->fetchAll(PDO::FETCH_ASSOC);
+            if($data){
+                return $data;
+            }else{
+                return FALSE;
+            }
+
+        } catch (PDOException $th) {
+            return NULL;
+        }
+    }
 
 
     /**

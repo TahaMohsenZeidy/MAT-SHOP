@@ -50,6 +50,9 @@
         </div>
 
         <div class='mx-auto' style='width: 500px;'>
+  <div class="card text-white bg-dark mb-3" style="max-width: 30rem;">
+  <div class="card-body">
+    <h5 class="card-title text-white">Ajouter admin</h5>
         <form  method='post'>
 
           <!-- Input -->
@@ -70,6 +73,8 @@
 
           <button type='submit' name='ajouter' value='ajouter' class='btn btn-block btn-primary'>ajouter</button>
         </form>
+      </div>
+    </div>
       </div>
 <?php endif;?>
 

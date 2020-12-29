@@ -135,6 +135,7 @@ $data = $model->createCustomers($firstname,$email,$password);
 if(isset($data)){
 $_SESSION["nom"]=$firstname;
 $_SESSION["email"]=$email;
+$_SESSION["connect"]="oui";
 Header("Location:/MVC");}
 }
 
@@ -150,8 +151,13 @@ function connecter(){
   <div class='mx-auto' style='width: 500px;'>
   <div class='card text-white bg-primary' style='width: 30rem;'>
   <div class='card-body'>
-  <h5 class='card-title text-white'>connexion</h5>
-  <form  action='authentifier.php' method='post'>
+  <h5 class='card-title text-white'>connexion</h5>";
+  if(isset($_SESSION["deconnect"]) ){
+    $resultat .='<div class="alert alert-danger" role="alert">
+    mot de passe incorrect
+    </div>';}
+
+  $resultat .="<form  action='authentifier.php' method='post'>
 
     <!-- Input -->
     <div class='mb-3'>
@@ -170,13 +176,19 @@ function connecter(){
     <!-- End Input -->
 
     <button type='submit' class='btn btn-block btn-primary'>S'inscrire</button>
+    <a href='mdpoublie.php' class='card-title text-white'>mot de passe oublié</a>
   </form>
   </div>
   </div>
 </div>";
+
 return $resultat;
 }
-
+function mdpoublie(){
+  global $model;
+  include "views/mdpoublie.php";
+  exit(0);
+}
 
 function authentifier(){
   global $model;
@@ -190,11 +202,12 @@ if($data){
 $_SESSION["nom"]=$data["firstname"];
 $_SESSION["email"]=$data["email"];
 $_SESSION["connect"]="oui";
-print_r($_SESSION);
+//print_r($_SESSION);
 //exit(0);
 Header("Location:/MVC");
 }
 else{
+  $_SESSION["deconnect"]="oui";
   Header("Location:/MVC/connecter.php");
 }
 }
@@ -269,7 +282,10 @@ function achat(){
   $tab=$model->getoneCustomer($email);
   $idCustomer=$tab[0]["id"];
   $infoclient=$model->getCustomer($idCustomer);
-  //print_r($infoclient);
+  $to_email =$email ;
+  $subject = "vos achats";
+  $body = "dans deux jours sera delivrer \n contact:24******\n";
+  $headers = "From: ayoubyaich85@gmail.com";
   if($_SESSION["connect"]!="oui" ){
      Header("Location:/MVC/connecter.php");
   }
@@ -280,19 +296,23 @@ function achat(){
   elseif(isset($_POST["id1"])){
     $data=$model->getProduct(null,null,$_POST["id1"]);
     $idprod=$data["0"]["id"];
+    $body .= "nom du produit:".$data["0"]["name"]." |  quantité:".$_POST["qte"];
     $t=$model->createOrders($idCustomer,$idprod,$_POST["qte"],$data["0"]["price"]*$_POST["qte"]);
+    mail($to_email, $subject, $body, $headers);
     Header("Location:/MVC/showpanier.php");
   }
   else{
     $total=array_count_values($_SESSION['panier']);//id=>qte
     foreach ($total as $key => $value) {
       $data=$model->getProduct(null,null,$key);
+      $body.= "nom du produit:".$data["0"]["name"]." |  quantité:".$value."\n";
       $idprod=$data["0"]["id"];
       $t=$model->createOrders($idCustomer,$idprod,$value,$data["0"]["price"]*$value);
       Header("Location:/MVC/showpanier.php");
     }
-
+    mail($to_email, $subject, $body, $headers);
   }
+
 }
 function supprimer(){
   session_start();
@@ -632,8 +652,12 @@ function admin(){
   <div class='mx-auto' style='width: 500px;'>
   <div class='card text-white bg-primary' style='width: 30rem;'>
   <div class='card-body'>
-  <h5 class='card-title text-white'>inscrivez-vous</h5>
-  <form  action='authentifieradmin.php' method='post'>
+  <h5 class='card-title text-white'>inscrivez-vous</h5>";
+  if(isset($_SESSION["falsemdp"]) ){
+    $resultat .='<div class="alert alert-danger" role="alert">
+    mot de passe incorrect
+    </div>';}
+  $resultat .="<form  action='authentifieradmin.php' method='post'>
     <!-- Input -->
     <div class='mb-3'>
       <div class='input-group input-group form'>
@@ -674,6 +698,7 @@ $_SESSION["emailadmin"]=$data["email"];
 Header("Location:/MVC/dashboard.php");
 }
 else{
+  $_SESSION["falsemdp"]="oui";
   Header("Location:/MVC/admin.php");
 }}
 }

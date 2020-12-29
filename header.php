@@ -56,11 +56,11 @@
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="account_selection">
-										<?php if(empty($_SESSION["connect"])):?>
+										<?php if(empty($_SESSION["connect"]) ):?>
 										<li><a href="connecter.php"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
 										<?php endif; ?>
 										<?php
-										 if(empty($_SESSION["connect"])):   ?>
+										 if(empty($_SESSION["connect"]) ):   ?>
 										<li><a href="inscription.php"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
 										<?php endif; ?>
 										<?php if(isset($_SESSION["connect"])):?>
