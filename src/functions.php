@@ -89,11 +89,10 @@ return "
 
 function inscription(){
     $result = '<div class="mx-auto" style="width: 500px;">
+    <div class="card text-white bg-primary mb-3" style="max-width: 30rem;">
+  <div class="card-body">
+    <h5 class="card-title text-white">registrer</h5>
     <form class="" action="ajouter.php" method="post">
-      <div class="mb-4">
-        <h2 class="h4">INSCRIPTION</h2>
-      </div>
-
       <!-- Input -->
       <div class=" mb-3">
         <div class="input-group input-group form">
@@ -120,6 +119,8 @@ function inscription(){
 
       <button type="submit" class="btn btn-block btn-primary">S\'inscrire</button>
     </form>
+    </div>
+    </div>
   </div>';
     return $result;
 }
@@ -147,6 +148,9 @@ function deconnecter(){
 function connecter(){
   $resultat="<br><br>
   <div class='mx-auto' style='width: 500px;'>
+  <div class='card text-white bg-primary' style='width: 30rem;'>
+  <div class='card-body'>
+  <h5 class='card-title text-white'>connexion</h5>
   <form  action='authentifier.php' method='post'>
 
     <!-- Input -->
@@ -167,6 +171,8 @@ function connecter(){
 
     <button type='submit' class='btn btn-block btn-primary'>S'inscrire</button>
   </form>
+  </div>
+  </div>
 </div>";
 return $resultat;
 }
@@ -622,10 +628,12 @@ Header("Location:/MVC/account.php");
 
 /************     partie admin    *******************/
 function admin(){
-  $resultat="<br><br><br><br>
+  $resultat="
   <div class='mx-auto' style='width: 500px;'>
+  <div class='card text-white bg-primary' style='width: 30rem;'>
+  <div class='card-body'>
+  <h5 class='card-title text-white'>inscrivez-vous</h5>
   <form  action='authentifieradmin.php' method='post'>
-
     <!-- Input -->
     <div class='mb-3'>
       <div class='input-group input-group form'>
@@ -644,6 +652,8 @@ function admin(){
 
     <button type='submit' class='btn btn-block btn-primary'>S'inscrire</button>
   </form>
+  </div>
+  </div>
 </div>";
 return $resultat;
 }
@@ -656,10 +666,10 @@ $password = $_POST["password"];
 $data=$model->authentifierAdmin($email,$password);}
 if(isset ($data)){
 if($data){
-session_start();
-$_SESSION["nom"]=$data["firstname"];
-$_SESSION["email"]=$data["email"];
-$_SESSION["connect"]="oui";
+//session_start();
+//$_SESSION["nom"]=$data["firstname"];
+$_SESSION["emailadmin"]=$data["email"];
+//$_SESSION["connect"]="oui";
 //print_r($_SESSION);
 Header("Location:/MVC/dashboard.php");
 }
@@ -690,5 +700,10 @@ exit(0);
 function achatadmin(){
 global $model;
 include "views/achatadmin.php";
+exit(0);
+}
+function ajouteradmin(){
+global $model;
+include "views/ajouteradmin.php";
 exit(0);
 }

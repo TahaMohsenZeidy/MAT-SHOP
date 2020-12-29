@@ -43,7 +43,6 @@ class DataLayer{
         } catch (PDOException $th) {
             return NULL;
         }
-
     }
 
     /**
@@ -86,6 +85,43 @@ class DataLayer{
             return NULL;
         }
     }
+
+    function getAdmin($email){
+            $sql = "SELECT * FROM admin WHERE email = '$email' ";
+            try {
+                $result = $this->connexion->prepare($sql);
+                $var = $result->execute();
+                $data = $result->fetchAll(PDO::FETCH_ASSOC);
+                if($data){
+                    unset($data[0]['password']);
+                    return $data;
+                }else{
+                    return FALSE;
+                }
+
+            } catch (PDOException $th) {
+                return NULL;
+            }
+        }
+        function createAdmin($email,$password){
+            $sql = 'INSERT INTO admin (email,password) VALUES (:email,:password)';
+            try {
+    			//print_r( $this->connexion);
+                $result = $this->connexion->prepare($sql);
+                $var = $result->execute(array(
+                    ':email' => $email,
+                    ':password' =>$password
+                ));
+                if($var){
+                    return TRUE;
+                }else{
+                    return FALSE;
+                }
+            } catch (PDOException $th) {
+                return NULL;
+            }
+        }
+
 
     /**
      * fonction qui créer un customers en base de données
@@ -217,8 +253,22 @@ class DataLayer{
         } catch (PDOException $th) {
             return NULL;
         }
+    }
+    function getCategoryid($id){
+        $sql = "SELECT name FROM category WHERE  id = '$id'";
+        try {
+            $result = $this->connexion->prepare($sql);
+            $var = $result->execute();
+            $data = $result->fetchAll(PDO::FETCH_ASSOC);
+            if($data){
+                return $data;
+            }else{
+                return FALSE;
+            }
 
-
+        } catch (PDOException $th) {
+            return NULL;
+        }
     }
 
 
@@ -265,6 +315,7 @@ class DataLayer{
             return NULL;
         }
     }
+
 
     /**
      * fonction qui sert à récupérer les produits au sein de la base de données
@@ -394,6 +445,22 @@ class DataLayer{
                 return NULL;
             }
         }
+        function getadmins(){
+                $sql = "SELECT * FROM admin";
+                try {
+                    $result = $this->connexion->prepare($sql);
+                    $var = $result->execute();
+                    $data = $result->fetchAll(PDO::FETCH_ASSOC);
+                    if($data){
+                        return $data;
+                    }else{
+                        return FALSE;
+                    }
+
+                } catch (PDOException $th) {
+                    return NULL;
+                }
+            }
 
         function getProductsByPrice($prRange){
             $sql = "SELECT * FROM product WHERE price BETWEEN 0.0 AND :price";

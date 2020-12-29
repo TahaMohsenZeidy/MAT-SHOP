@@ -34,6 +34,19 @@
               catégories
             </a>
           </li>
+          <?php /*if (session_status() == PHP_SESSION_NONE) {
+              session_start();
+          }
+          $a=$model->getAdmin($_SESSION["emailadmin"]);
+          if($a[0]["priorite"]==1):*/
+          ?>
+          <li class="nav-item">
+            <a class="nav-link" href="ajouteradmin.php">
+              <span data-feather="bar-chart-2"></span>
+              ajouter admin
+            </a>
+          </li>
+        <?php //endif; ?>
         </ul>
 
       </div>
@@ -47,22 +60,6 @@
       //include "../data/DataLayer.php";
       //$model=new DataLayer();//instance de DataLayer
       $data=$model->getorders();
-      $resultat ="
-
-      <div class='col-sm'>
-      <div class='mx-auto' style='width: 600px;'>
-      <table class='table table-dark'>
-        <thead>
-          <tr>
-            <th scope='col'>#</th>
-            <th scope='col'>id</th>
-            <th scope='col'>id_customers</th>
-            <th scope='col'>id_product</th>
-      			<th scope='col'>quantity</th>
-      			<th scope='col'>price</th>
-      			<th scope='col'>created_at</th>
-          </tr>
-        </thead>";
       	$a1=0;
       	$a2=0;
       	$a3=0;
@@ -114,25 +111,23 @@
           if($rest=='12'){
       			$a12++;
       		}
-          $resultat .="<tbody>
-            <tr>
-              <th scope='row'>".$key=($key+1)."</th>
-              <td>".$value["id"]."</td>
-              <td>".$value["id_customers"]."</td>
-              <td>".$value["id_product"]."</td>
-      				<td>".$value["quantity"]."</td>
-      				<td>".$value["price"]."</td>
-      				<td>".$value["created_at"]."</td>
-            </tr>
-
-            ";
         }
-        $resultat .="</tbody></table></div></div></div>";
-
       ?>
-      <script type="text/javascript">
-window.onload = function () {
+      <?php
+      $cat=array();
+      foreach ($data as $key => $value) {
+        array_push($cat,$model->getProduct(null,null,$value["id_product"])[0]["category"]);
+      }
+      $categqte=array_count_values($cat);//[id_category]=>qte
+      arsort($categqte);
+      foreach ($categqte as $key => $value) {
+              $nomcatg=$model->getCategoryid($key);
+              $tnomcatg[$key]=$nomcatg[0]['name'];
+            }
 
+       ?>
+<script type="text/javascript">
+window.onload = function () {
 var chart = new CanvasJS.Chart("chartContainer1", {
 	animationEnabled: true,
 	exportEnabled: true,
@@ -173,6 +168,7 @@ chart.render();
 
 <?php
 $data=$model->getorders();
+//print_r($data);
 foreach ($data as $key => $value) {
   $redon[$key]=$value["id_product"];
   $redonclient[$key]=$value["id_customers"];
@@ -243,9 +239,35 @@ var chart = new CanvasJS.Chart("chartContainer3", {
 	}]
 });
 chart.render();
+var chart = new CanvasJS.Chart("chartContainer4", {
+theme: "light1", // "light1", "light2", "dark1", "dark2"
+exportEnabled: true,
+animationEnabled: true,
+title: {
+text: "les meilleurs categories ",
+horizontalAlign: "left"
+},
+data: [{
+type: "pie",
+startAngle: 25,
+toolTipContent: "<b>{label}</b>: {y}%",
+showInLegend: "true",
+legendText: "{label}",
+indexLabelFontSize: 16,
+indexLabel: "{label} - {y}%",
+dataPoints: [
+<?php $i=0;
+ foreach ($categqte as $key => $value) {
+   $acatg=$tnomcatg[$key];?>
+{ y: <?php echo $value; ?>, label: "<?php echo $acatg ?>" },
+<?php $i++;
+if($i == 3){break;}  }?>
+]
+}]
+});
+chart.render();
 }
-
-        </script>
+</script>
         <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         <?php $id=2; ?>
         <div class="container">
@@ -257,23 +279,30 @@ chart.render();
 
           </div>
           <div class="row">
-    <div class="col">
+      <div class="card" style="width: 30rem;">
+      <div class="card-body">
       <div id="chartContainer3" style="height: 370px; width: 100%;"></div>
-      <h3 class='product_name'><a href ='http://localhost/MVC/Customers.php'>voir les clients  </a></h3>
+    <p class="card-text">  <h3 class='product_name'><a href ='http://localhost/MVC/Customers.php'>voir les clients  </a></h3></p>
+  </div>
+</div>
       <br><br>
-         </div>
-         <div class="col">
-           <div id="chartContainer2" style="height: 370px; width: 100%;"></div>
-           <h3 class='product_name'><a href ='http://localhost/MVC/modifproduit.php'>voir et modifier les produits  </a></h3>
-         <br>
-         </div>
-          </div>
+      <div class="card" style="width: 30rem;">
+      <div class="card-body">
+      <div id="chartContainer2" style="height: 370px; width: 100%;"></div>
+    <p class="card-text">  <h3 class='product_name'><a href ='http://localhost/MVC/modifproduit.php'>voir les produits  </a></h3></p>
+  </div>
+</div>
+<div class="card" style="width: 30rem;">
+<div class="card-body">
+<div id="chartContainer4" style="height: 370px; width: 100%;"></div>
+<p class="card-text">  <h3 class='product_name'><a href ='http://localhost/MVC/categoryadmin.php'>voir les categories  </a></h3></p>
+</div>
+</div>
         </div>
 
     </main>
   </div>
 </div>
-<?php //print_r($nom); ?>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="styles/bootstrap4/popper.js"></script>
 <script src="styles/bootstrap4/bootstrap.min.js"></script>

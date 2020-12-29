@@ -16,7 +16,7 @@ $route = array("produit.php","achat.php","showpanier.php","ajouter.php","authent
                     "inscription.php","connecter.php","administration.php","deconnecter.php","supprimer.php",
                     "categorie.php","admin.php","authentifieradmin.php","ajouterproduit.php","recherche.php",
                     "modifproduit.php","dashboard.php","Customers.php", "getPriceRange.php","categoryadmin.php",
-                  "achatadmin.php","account.php","updateprofil.php","updateAction.php");
+                  "achatadmin.php","account.php","updateprofil.php","updateAction.php","ajouteradmin.php");
 $tabcategory=array();
 foreach ($category as $key => $value) {
   array_push($tabcategory,$key);
