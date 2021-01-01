@@ -29,7 +29,7 @@ foreach ($data as $key => $value){
   $name=$value["name"];
   $id=$value["id"];
   $promotion=$value["promotion"];
-  $new_prix=($prix*$promotion)/100;
+  $new_prix=$prix-($prix*$promotion)/100;
   $img='produit'.'/'.$value["image"];
   $resultat .="
 
@@ -383,7 +383,7 @@ foreach ($data as $key => $value){
   $name=$value["name"];
   $id=$value["id"];
   $promotion=$value["promotion"];
-  $new_prix=($prix*$promotion)/100;
+  $new_prix=$prix-($prix*$promotion)/100;
   $img='produit'.'/'.$value["image"];
   $resultat .="
 
@@ -513,7 +513,7 @@ foreach ($data as $key => $value){
   $name=$value["name"];
   $id=$value["id"];
   $promotion=$value["promotion"];
-  $new_prix=($prix*$promotion)/100;
+  $new_prix=$prix-($prix*$promotion)/100;
   $img='produit'.'/'.$value["image"];
   $resultat .="
 
@@ -849,7 +849,7 @@ foreach ($data as $key => $value){
   $name=$value["name"];
   $id=$value["id"];
   $promotion=$value["promotion"];
-  $new_prix=($prix*$promotion)/100;
+  $new_prix=$prix-($prix*$promotion)/100;
   $img='produit'.'/'.$value["image"];
   $resultat .="
 
