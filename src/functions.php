@@ -46,11 +46,11 @@ foreach ($data as $key => $value){
                   }
                   $resultat.="
                 <div class='product_info'>
-                  
+
                   <h6 class='product_name'><a href ='http://localhost/MVC/detail.php?id=$id'> $name </a></h6>";
                    if ($promotion!= null) {
                     $resultat.="<div class='product_price'>$new_prix dt<span>$prix dt</span></div>";}
-                
+
                    else{
                   $resultat.=" <div class='product_price'>$prix dt</div>";}
                   $resultat.="
@@ -266,9 +266,9 @@ function showpanier(){
   	<td>".$qte."
     </td>
     <td>
-    <form style=".'float:right; padding:1 0px;'." action='achat.php' method='post'>
+    <form style=".'float:right; padding:10px;'." action='achat.php' method='post'>
     <input type='hidden' name='qte' value=$qte />
-    <button type='submit' class='btn btn-success' name='id1' value=$id  >acheter</button>
+    <button type='submit' class='btn btn-success' name='id1' value=$id style='width: 91.83px;' >acheter</button>
     </form>
     <form style=".'float:right; padding:10px;'." action='supprimer.php' method='post'>
     <button type='submit' class='btn btn-danger' name='supp' value=$key  >supprimer</button>
@@ -400,11 +400,11 @@ foreach ($data as $key => $value){
                   }
                   $resultat.="
                 <div class='product_info'>
-                  
+
                   <h6 class='product_name'><a href ='http://localhost/MVC/detail.php?id=$id'> $name </a></h6>";
                    if ($promotion!= null) {
                     $resultat.="<div class='product_price'>$new_prix dt<span>$prix dt</span></div>";}
-                
+
                    else{
                   $resultat.=" <div class='product_price'>$prix dt</div>";}
                   $resultat.="
@@ -530,11 +530,11 @@ foreach ($data as $key => $value){
                   }
                   $resultat.="
                 <div class='product_info'>
-                  
+
                   <h6 class='product_name'><a href ='http://localhost/MVC/detail.php?id=$id'> $name </a></h6>";
                    if ($promotion!= null) {
                     $resultat.="<div class='product_price'>$new_prix dt<span>$prix dt</span></div>";}
-                
+
                    else{
                   $resultat.=" <div class='product_price'>$prix dt</div>";}
                   $resultat.="
@@ -866,11 +866,11 @@ foreach ($data as $key => $value){
                   }
                   $resultat.="
                 <div class='product_info'>
-                  
+
                   <h6 class='product_name'><a href ='http://localhost/MVC/detail.php?id=$id'> $name </a></h6>";
                    if ($promotion!= null) {
                     $resultat.="<div class='product_price'>$new_prix dt<span>$prix dt</span></div>";}
-                
+
                    else{
                   $resultat.=" <div class='product_price'>$prix dt</div>";}
                   $resultat.="
