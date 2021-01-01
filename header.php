@@ -89,7 +89,7 @@
 								<li><a href="<?php echo "http://localhost/MVC/"; ?>">Home</a></li>
 
 								<li><a href="produit.php">Produits</a></li>
-								<li><a href="">Promotion</a></li>
+								<li><a href="promotion.php">Promotion</a></li>
 								<li><a href="contact.php">Contact</a></li>
 								<li> <form method="post" action="recherche.php">
 

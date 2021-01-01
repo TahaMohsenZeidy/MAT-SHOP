@@ -493,5 +493,24 @@ class DataLayer{
             }
         }
 
+function promotion(){
 
+        $sql = "SELECT * FROM product where promotion IS NOT NULL ";
+         try {
+            $result = $this->connexion->prepare($sql);
+
+            $var = $result->execute();
+            $data = $result->fetchAll(PDO::FETCH_ASSOC);//un tableau de la base de données
+            if($data){
+                return $data;
+
+            }else{
+                return FALSE;
+            }
+
+        } catch (PDOException $th) {
+            return NULL;
+        }
+
+    }
 }
