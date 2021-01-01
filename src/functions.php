@@ -379,9 +379,11 @@ function categorie(){
   //print_r($data);
   $resultat="";
 foreach ($data as $key => $value){
-   $prix=$value["price"];
+  $prix=$value["price"];
   $name=$value["name"];
   $id=$value["id"];
+  $promotion=$value["promotion"];
+  $new_prix=($prix*$promotion)/100;
   $img='produit'.'/'.$value["image"];
   $resultat .="
 
@@ -391,15 +393,21 @@ foreach ($data as $key => $value){
                 <div class='product_image'>
                   <img src=$img alt='' width=225 height=225  >
                 </div>
-                <div class='favorite favorite_left'></div>
+                <div class='favorite favorite_left'></div>";
+                if ($promotion!= null) {
 
+                    $resultat.= "<div class='product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center'><span>-$promotion % </span></div>";
+                  }
+                  $resultat.="
                 <div class='product_info'>
-
-
-                  <h6 class='product_name'><a href ='http://localhost/MVC/detail.php?id=$id'> $name </a></h6>
-
-
-                  <div class='product_price'>$prix dt</div>
+                  
+                  <h6 class='product_name'><a href ='http://localhost/MVC/detail.php?id=$id'> $name </a></h6>";
+                   if ($promotion!= null) {
+                    $resultat.="<div class='product_price'>$new_prix dt<span>$prix dt</span></div>";}
+                
+                   else{
+                  $resultat.=" <div class='product_price'>$prix dt</div>";}
+                  $resultat.="
                 </div>
               </div>
               <div class='red_button add_to_cart_button'>
