@@ -218,7 +218,12 @@ function showpanier(){
   global $model;
   //ini_set( "display_errors", 0);
   //session_start();
-  $result = '<table class="table">
+  $result = '
+  <div class="super_container">
+  <div class="mx-auto" style="width: 1000px;">
+  <div class="card text-white " style="width: 60rem;">
+  <div class="card-body">
+  <table class="table">
     <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
@@ -258,7 +263,7 @@ function showpanier(){
     <button type='submit' class='btn btn-success' name='id1' value=$id  >acheter</button>
     </form>
     <form style=".'float:right; padding:10px;'." action='supprimer.php' method='post'>
-    <button type='submit' class='btn btn-success' name='supp' value=$key  >supprimer</button>
+    <button type='submit' class='btn btn-danger' name='supp' value=$key  >supprimer</button>
     </form>
     </td>
     </tr>";
@@ -266,11 +271,23 @@ function showpanier(){
     $total_price +=  $table["price"]*$redon[$value];
 
   }
-    $result .= "<tr><td></td><td></td><td></td><td>Prix total (HT)</td><td>".number_format($total_price,2)."€
+    $result .= "<tr><td></td><td></td><td></td><td>Prix total (HT)</td><td>".number_format($total_price,2)."dt
     <form action='achat.php' method='post'>
     <button type='submit' class='btn btn-success' name='id2' value=$total_price >acheter</button>
     </form>
-    </td><td></td></tr>";
+    </td><td></td></tr>
+    </div>
+    </div>
+    </div>
+    </div>
+    <style>
+    super_container {
+  position: absolute;
+  top: 50px;
+  border: 3px solid green;
+}
+    <style>
+    ";
 
 return $result;
 }
@@ -353,23 +370,67 @@ function categorie(){
   // exit(0);
   //print_r($data);
   $resultat="";
-  foreach ($data as $key => $value){
-    $id=$value["id"];
-  	$img='produit'.'/'.$value["image"];
-  	$resultat .="
-  <div class='card' style='width: 18rem; display:inline-block;'>
-          <img src=$img class='card-img-top'>
-  		<div class='card-body'>
-            <h5 class='card-title'></h5>
-  <form  action='' method='post'>
-            <a href='http://localhost/MVC/detail.php?id=$id' class='btn btn-primary'>Détails</a>
-            <button type='submit' class='btn btn-danger' name='id' value=$id>add</button>
+foreach ($data as $key => $value){
+   $prix=$value["price"];
+  $name=$value["name"];
+  $id=$value["id"];
+  $img='produit'.'/'.$value["image"];
+  $resultat .="
 
-  </form>
-  		</div>
-        </div>";
-  }
-  return "<div class='container'>".$resultat."</div>";
+
+             <div class='product-item men' style='display:inline-block; width:236.8px;'>
+              <div class='product discount product_filter'>
+                <div class='product_image'>
+                  <img src=$img alt='' width=225 height=225  >
+                </div>
+                <div class='favorite favorite_left'></div>
+
+                <div class='product_info'>
+
+
+                  <h6 class='product_name'><a href ='http://localhost/MVC/detail.php?id=$id'> $name </a></h6>
+
+
+                  <div class='product_price'>$prix dt</div>
+                </div>
+              </div>
+              <div class='red_button add_to_cart_button'>
+              <form  action='' method='post'>
+
+                <button type='submit'  class='button' name='id' value=$id>Ajouter au panier </button>
+
+              </form>
+
+              </div>
+            </div>
+            <style>
+.button {
+  width:236.8;
+  height:40px;
+  background-color:#fe4c50;
+  border: none;
+  color: white;
+  padding: 1px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+
+
+</style>
+           ";
+
+
+
+}
+return "
+<div class='row' style='margin-left:150px;' >
+      <div class='col' >
+          <div class='product-grid' data-isotope='{ 'itemSelector': '.product-item', 'layoutMode': 'fitRows' }>".$resultat."</div> </div></div> ";
+
+
 }
 
 //hedhom li zed'hom taha
