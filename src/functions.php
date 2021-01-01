@@ -639,6 +639,7 @@ return "
 }
 /*******profil du client *****/
 function account(){
+if(isset($_SESSION["connect"])){
 global $model;
 //session_start();
 $mail=$_SESSION["email"];
@@ -669,7 +670,10 @@ $data=$model->getoneCustomer($mail);
   </div>
   </div>
   ';
-  return $result;
+  return $result;}
+  else{
+     Header('Location:/MVC/connecter.php');  
+  }
 }
 function updateprofil(){
   global $model;
