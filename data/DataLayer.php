@@ -492,6 +492,22 @@ class DataLayer{
                 return NULL;
             }
         }
+        function updatePromotion($newpromo,$id){
+        $sql="UPDATE product SET promotion=$newpromo WHERE id=$id ";
+        try {
+            $result = $this->connexion->prepare($sql);
+            $var = $result->execute();
+            if($var){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+
+        } catch (PDOException $th) {
+            return NULL;
+        }
+
+        }
 
 function promotion(){
 
