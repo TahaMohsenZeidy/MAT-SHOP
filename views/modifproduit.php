@@ -71,40 +71,107 @@
 
 <br>
 <?php
-$data=$model->getProduct();
 $resultat ="
 <h2 class='h2'>Table des produits</h2>
 <div class='col-sm'>
 <div class='mx-auto' style='width: 1000px;'>
 <table class='table table-dark'>
-  <thead>
+  <thead class='tab'>
     <tr>
       <th scope='col'>#</th>
       <th scope='col'>id</th>
-      <th scope='col'>nom du produit</th>
+      <th scope='col'>nom</th>
       <th scope='col'>prix</th>
       <th scope='col'>quantité</th>
+      <th scope='col'>promotion</th>
       <th scope='col'>image</th>
-    </tr>
-  </thead>";
+      <th scope='col'>
+      <form method='post' action=''>
+      <div class='input-group'>
+   <input size='30' type='text' id='a' name='recherche' class='form-control'   placeholder='Rechercher un produit ' >
+   <span class='input-group-btn'>
+        <button class='btn btn-danger' name='rech' style='width: 60px; background: #fe4c50' type='submit'><i class='fa fa-search'  aria-hidden='true'></i></button>
+   </span>
+   </div>
+   </form>
+      </th>
+     </tr>
+  </thead>
+  ";
+if(!isset($_POST["rech"])){
+$data=$model->getProduct();
   foreach ($data as $key => $value) {
     $id=$value["id"];
+    $newprix="";
+    if(($value['promotion']==null) || ($value['promotion']==0) ){
+      $value['promotion']=0;
+    }
+    else{
+      $newprix="prix:";
+      $newprix.=$value["price"]-($value["price"]*$value['promotion'])/100 ." dt";
+    }
     $img='produit'.'/'.$value["image"];
 $resultat .="<tbody>
       <tr>
         <th scope='row'>".$key=($key+1)."</th>
         <td>".$value["id"]."</td>
         <td>".$value["name"]."</td>
-        <td>".$value["price"]."</td>
+        <td>".$value["price"]."dt</td>
         <td>".$value["stock"]."</td>
+        <td>".$value["promotion"]."%<br>$newprix</td>
         <td><img src=$img alt='' width=225 height=225></td>
         <form method='post'>
-        <td><button type='submit' name='supp' value='$id' onClick='confirmer()' class='btn btn-danger'>supprimer</button></td>
+        <td><button type='submit' name='supp' value='$id' onClick='confirmer()' class='btn btn-danger'>supprimer</button>
+<br>
+        <div class='input-group'>
+     <input size='30' type='text' id='a' name='prom' class='form-control'   placeholder='ajouter promotion' >
+     <span class='input-group-btn'>
+          <button class='btn btn-danger' name='subpro' value=$id style='width: 60px; background: #fe4c50' type='submit'><i class='fas fa-plus'></i></button>
+     </span>
+     </div>
+        </td>
         </form>
       </tr>
       ";
   }
-  $resultat .="</tbody></table></div></div>";?>
+  $resultat .="</tbody></table></div></div>";}
+  if(isset($_POST["rech"])){
+    $rech=$model->rechercher($_POST["recherche"]);
+      foreach ($rech as $key => $value) {
+        $id=$value["id"];
+        $newprix="";
+        if(($value['promotion']==null) || ($value['promotion']==0) ){
+          $value['promotion']=0;
+        }
+        else{
+          $newprix="prix:";
+          $newprix .=$value["price"]-($value["price"]*$value['promotion'])/100 ." dt";
+        }
+        $img='produit'.'/'.$value["image"];
+    $resultat .="<tbody>
+          <tr>
+            <th scope='row'>".$key=($key+1)."</th>
+            <td>".$value["id"]."</td>
+            <td>".$value["name"]."</td>
+            <td>".$value["price"]."dt</td>
+            <td>".$value["stock"]."</td>
+            <td>".$value["promotion"]."%<br>$newprix</td>
+            <td><img src=$img alt='' width=225 height=225></td>
+            <form method='post'>
+            <td><button type='submit' name='supp' value='$id' onClick='confirmer()' class='btn btn-danger'>supprimer</button>
+            <div class='input-group'>
+         <input size='30' type='text' id='a' name='prom' class='form-control'   placeholder='ajouter promotion ' >
+         <span class='input-group-btn'>
+              <button class='btn btn-danger' name='subpro' value=$id style='width: 60px; background: #fe4c50' type='submit'><i class='fas fa-plus'></i></button>
+            </td>
+            </form>
+          </tr>
+          ";
+      }
+      $resultat .="</tbody></table></div></div>";
+
+  }
+  ?>
 <br>
 <?php echo $resultat ?>
 </main>
@@ -132,4 +199,8 @@ $resultat .="<tbody>
         $var=$_FILES["img"]["name"];
         $model->insertProduct($_POST["nomprod"],$_POST["description"],$_POST["aprix"],$_POST["stock"],$_POST["categ"],$var);
       }?>
-      <?php if(isset($_POST["supp"])){$model->deleteprod($_POST['supp']);}?>
+      <?php if(isset($_POST["supp"])){$model->deleteprod($_POST['supp']);}
+            if(isset($_POST["subpro"])){$model->updatePromotion($_POST['prom'],$_POST["subpro"]);}
+
+
+      ?>

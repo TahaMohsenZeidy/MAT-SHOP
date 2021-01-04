@@ -309,7 +309,7 @@ function achat(){
   $infoclient=$model->getCustomer($idCustomer);
   $to_email =$email ;
   $subject = "vos achats";
-  $body = "dans deux jours sera delivrer \n contact:24******\n";
+  $body = "dans deux jours sera delivrer \n contact:24 043 800\n";
   $headers = "From: ayoubyaich85@gmail.com";
   if($_SESSION["connect"]!="oui" ){
      Header("Location:/MVC/connecter.php");
@@ -321,7 +321,7 @@ function achat(){
   elseif(isset($_POST["id1"])){
     $data=$model->getProduct(null,null,$_POST["id1"]);
     $idprod=$data["0"]["id"];
-    $body .= "nom du produit:".$data["0"]["name"]." |  quantité:".$_POST["qte"];
+    $body .= "nom du produit:".$data["0"]["name"]." =>  quantité:".$_POST["qte"];
     $t=$model->createOrders($idCustomer,$idprod,$_POST["qte"],$data["0"]["price"]*$_POST["qte"]);
     mail($to_email, $subject, $body, $headers);
     Header("Location:/MVC/showpanier.php");
@@ -330,7 +330,7 @@ function achat(){
     $total=array_count_values($_SESSION['panier']);//id=>qte
     foreach ($total as $key => $value) {
       $data=$model->getProduct(null,null,$key);
-      $body.= "nom du produit:".$data["0"]["name"]." |  quantité:".$value."\n";
+      $body.= "nom du produit:".$data["0"]["name"]." =>  quantité:".$value."\n";
       $idprod=$data["0"]["id"];
       $t=$model->createOrders($idCustomer,$idprod,$value,$data["0"]["price"]*$value);
       Header("Location:/MVC/showpanier.php");
@@ -672,7 +672,7 @@ $data=$model->getoneCustomer($mail);
   ';
   return $result;}
   else{
-     Header('Location:/MVC/connecter.php');  
+     Header('Location:/MVC/connecter.php');
   }
 }
 function updateprofil(){
