@@ -255,6 +255,8 @@ function showpanier(){
       $prix=$table['price'];
       $qte=$redon[$value];
       $id=$table['id'];
+      $promo=$data["0"]["price"]*$qte-($data["0"]["price"]*$data["0"]["promotion"]/100)*$qte;
+      //$prix2=$data["0"]["price"]*$_POST["qte"]-$promo;
       //$_SESSION["0"]=$qte;
   	$img='produit'.'/'.$table["image"];
   		$result .= "<tr>
@@ -262,7 +264,7 @@ function showpanier(){
       <td>".$table['name']."</td>
       <td>".$table['description']."</td>
       <td><img src=$img width=225 height=225 /></td>
-  	<td>".$prix*$qte."</td>
+  	<td>".$promo."</td>
   	<td>".$qte."
     </td>
     <td>
@@ -276,7 +278,8 @@ function showpanier(){
     </td>
     </tr>";
     array_push($_SESSION["total"],$qte);
-    $total_price +=  $table["price"]*$redon[$value];
+    $total_price +=  $promo;
+    //$table["price"]*$redon[$value];
 
   }
     $result .= "<tr><td></td><td></td><td></td><td>Prix total (HT)</td><td>".number_format($total_price,2)."dt
@@ -311,28 +314,37 @@ function achat(){
   $subject = "vos achats";
   $body = "dans deux jours sera delivrer \n contact:24 043 800\n";
   $headers = "From: ayoubyaich85@gmail.com";
+  //print_r($infoclient);
   if($_SESSION["connect"]!="oui" ){
      Header("Location:/MVC/connecter.php");
   }
-  elseif(isset($infoclient["tel"]) && isset($infoclient["lastname"]) && isset($infoclient["adresse"])){
+
+  elseif((!isset($infoclient[0]["tel"])) || (!isset($infoclient[0]["lastname"])) || (!isset($infoclient[0]["adresse"]))){
     Header("Location:/MVC/updateprofil.php");
   }
 
   elseif(isset($_POST["id1"])){
     $data=$model->getProduct(null,null,$_POST["id1"]);
     $idprod=$data["0"]["id"];
-    $body .= "nom du produit:".$data["0"]["name"]." =>  quantité:".$_POST["qte"];
-    $t=$model->createOrders($idCustomer,$idprod,$_POST["qte"],$data["0"]["price"]*$_POST["qte"]);
+    $promo=$data["0"]["price"]*$_POST["qte"]-($data["0"]["price"]*$data["0"]["promotion"]/100)*$_POST["qte"];
+    $body .= "nom du produit:".$data["0"]["name"]." =>  quantité:".$_POST["qte"] ."\n prix=".$promo ."\n";
+    $t=$model->createOrders($idCustomer,$idprod,$_POST["qte"],$promo);
     mail($to_email, $subject, $body, $headers);
+    if (mail($to_email, $subject, $body, $headers)) {
+      echo "<script>
+      alert('verifier votre email');
+      </script>";
+    }
     Header("Location:/MVC/showpanier.php");
   }
-  else{
+  elseif(isset($_POST["id2"])){
     $total=array_count_values($_SESSION['panier']);//id=>qte
     foreach ($total as $key => $value) {
       $data=$model->getProduct(null,null,$key);
-      $body.= "nom du produit:".$data["0"]["name"]." =>  quantité:".$value."\n";
       $idprod=$data["0"]["id"];
-      $t=$model->createOrders($idCustomer,$idprod,$value,$data["0"]["price"]*$value);
+      $promo=$data["0"]["price"]*$value-($data["0"]["price"]*$data["0"]["promotion"]/100)*$value;
+      $body.= "nom du produit:".$data["0"]["name"]." =>  quantité:".$value." prix=$promo \n";
+      $t=$model->createOrders($idCustomer,$idprod,$value,$promo);
       Header("Location:/MVC/showpanier.php");
     }
     mail($to_email, $subject, $body, $headers);
@@ -655,7 +667,7 @@ $data=$model->getoneCustomer($mail);
   <div class="mx-auto" style="width: 500px;">
 
   <ul class="list-group">
-  <li class="list-group-item active">Bienvenu sur votre Profil '.$data[0]["firstname"].'</li>
+  <li class="list-group-item active">Bienvenue sur votre Profil '.$data[0]["firstname"].'</li>
   <li class="list-group-item"> Sexe : '.$data[0]["sexe"].'</li>
   <li class="list-group-item"> Nom : '.$data[0]["lastname"].'</li>
   <li class="list-group-item"> Prénom : '.$data[0]["firstname"].'</li>

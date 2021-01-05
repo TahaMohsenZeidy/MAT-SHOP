@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <?php include"head.php";?>
 <body>
-<?php include"header.php";?>
+<?php include"headerAdmin.html";?>
 <div class="main_slider">
   <div class="container-fluid">
     <?php //include "../head.php";

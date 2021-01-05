@@ -3,10 +3,10 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <?php include"head.php";?>
 <body>
-<?php include"header.php";?>
+<?php include"headerAdmin.html";?>
 <div class="main_slider">
   <div class="container-fluid">
-      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block  sidebar collapse">
         <div class="sidebar-sticky pt-3">
           <ul class="nav flex-column">
             <li class="nav-item">
@@ -59,7 +59,13 @@
                         <input type="text" name="stock" class="form-control" placeholder="stock">
                       </div>
                       <div class="col">
-                        <input type="text" name="categ" class="form-control" placeholder="categorie:1,2,3..">
+                        <!--<input type="text" name="categ" class="form-control" placeholder="categorie:1,2,3..">-->
+                        <select name="categ" class="custom-select" id="inputGroupSelect01">
+                          <?php $category = $model->getCategory();
+                          foreach($category as $id => $name): ?>
+                              <li><option value=<?php echo $id+1; ?>><?php echo $name['name'];?></option></li>
+                          <?php endforeach; ?>
+                        </select>
                       </div>
   					<div class="col">
                         <input type="file" name="img" class="form-control" >

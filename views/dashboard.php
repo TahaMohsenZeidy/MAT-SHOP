@@ -3,11 +3,14 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <?php include"head.php";?>
 <body>
-<?php include"header.php";?>
+<?php include"headerAdmin.html";?>
+
+
+
 <div class="main_slider">
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block  sidebar collapse">
       <div class="sidebar-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -112,6 +115,9 @@
       			$a12++;
       		}
         }
+        $arr=array($a1, $a2, $a3, $a4,$a5,$a6,$a7,$a8,$a9,$a10,$a11,$a12);
+        $max=max($arr);
+        $min=min($arr);
       ?>
       <?php
       $cat=array();
@@ -147,18 +153,18 @@ var chart = new CanvasJS.Chart("chartContainer1", {
 		indexLabelPlacement: "outside",
 		dataPoints: [
 
-			{ x:  1 , y: <?php echo $a1 ?> },
+			{ x: 1 , y: <?php echo $a1 ?> },
 			{ x: 2, y: <?php echo $a2 ?> },
 			{ x: 3, y: <?php echo $a3 ?> },
 			{ x: 4, y: <?php echo $a4 ?> },
 			{ x: 5, y: <?php echo $a5 ?> },
 			{ x: 6, y: <?php echo $a6 ?> },
 			{ x: 7, y: <?php echo $a7 ?> },
-			{ x: 8, y: <?php echo $a8 ?>, indexLabel: "\u2605 Highest" },
+			{ x: 8, y: <?php echo $a8 ?>  },
 			{ x: 9, y: <?php echo $a9 ?> },
 			{ x: 10, y: <?php echo $a10 ?> },
 			{ x: 11, y: <?php echo $a11 ?> },
-			{ x: 12, y: <?php echo $a12 ?>,indexLabel: "\u2691 Lowest" },
+			{ x: 12, y: <?php echo $a12 ?> },
 
 		]
 	}]
@@ -273,8 +279,7 @@ chart.render();
         <div class="container">
           <div class="row">
             <div class="col">
-              <div id="chartContainer1" style="height: 370px; width: 900px;"></div>
-              <h3 class='product_name'><a href ='http://localhost/MVC/achatadmin.php'>voir et modifier les produits  </a></h3>            </div>
+              <div id="chartContainer1" style="height: 370px; width: 1000px;"></div>
             <br>
 
           </div>
