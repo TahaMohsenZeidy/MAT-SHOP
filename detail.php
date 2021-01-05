@@ -40,6 +40,8 @@ foreach ($data as $key => $value){
   $prix=$value["price"];
   $name=$value["name"];
   $id=$value["id"];
+  $promotion=$value["promotion"];
+  $new_prix=$prix-($prix*$promotion)/100;
   $description=$value["description"];
   $img='produit'.'/'.$value["image"];}
 echo "
@@ -54,9 +56,12 @@ echo "
     <div class='product-item men' style='display:inline-block; width:650px;height:350px;'>
     <div style='margin-left:20px;margin-right:20px;'>
 
-     <h4 style='margin-top:20px;'>$description</h4>
-     <h2 style='margin-top:50px; color:#fe4c50';>$prix dt</h2>
-     <form  action='' method='post'>
+     <h4 style='margin-top:20px;'>$description</h4>";
+      if ($promotion!= null) {
+         echo " <div class='product_price'><h2 style='margin-top:50px; color:#fe4c50';>$new_prix dt <span>$prix dt</span></h2></div>";}
+      else {   
+          echo "<h2 style='margin-top:50px; color:#fe4c50';>$prix dt</h2>";}
+     echo "<form  action='' method='post'>
      <button  type='submit' class='button' name='id' value=$id style='margin-top:30px;'><i class='fa fa-shopping-cart'></i> J'ACHETE
      </button>
      </form>
