@@ -33,6 +33,12 @@
                 categorie
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ajouteradmin.php">
+                <span data-feather="bar-chart-2"></span>
+                ajouter admin
+              </a>
+            </li>
 
         </div>
       </nav>
@@ -132,7 +138,7 @@ $resultat .="<tbody>
 
       <?php
       if(isset($_POST["ajouter"])) {
-        print_r($_POST);
+        //print_r($_POST);
         $model->createAdmin($_POST["email"],$_POST["password"]);
         //header( "Location: ajouteradmin.php" );
         //exit(0);
