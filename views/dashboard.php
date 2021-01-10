@@ -303,6 +303,15 @@ chart.render();
 <p class="card-text">  <h3 class='product_name'><a href ='http://localhost/MVC/categoryadmin.php'>voir les categories  </a></h3></p>
 </div>
 </div>
+<div class="card" style="width: 30rem;">
+  <h2 class="card-title">   number of visitors</h2>
+<div class="card-body">
+  <br><br><br><br>
+  <div class="card img-center">
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7737601&style=0011&nbdigits=5&type=page&initCount=0" title="Free Counter" Alt="web counter"   border="0" />
+</div>
+</div>
+</div>
         </div>
 
     </main>
