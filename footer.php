@@ -37,7 +37,11 @@
                         <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                       </ul>
 					</div>
-				</div>
+          <div style="right:100px;" class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
+        <h5>  <span>nombre de visiteurs</span><img src="https://hitwebcounter.com/counter/counter.php?page=7737601&style=0011&nbdigits=5&type=page&initCount=0" title="Free Counter" Alt="web counter"   border="0" />
+        </h5>
+         </div>
+      	</div>
                     </div>
                 </div>
             </div>
