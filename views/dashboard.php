@@ -171,6 +171,7 @@ var chart = new CanvasJS.Chart("chartContainer1", {
 });
 chart.render();
 
+// Best Sellers 
 
 <?php
 $data=$model->getorders();
@@ -210,6 +211,7 @@ indexLabelFontSize: 16,
 indexLabel: "{label} - {y}%",
 dataPoints: [
 <?php $i=0;
+// sorting ... 
 arsort($result);
  foreach ($result as $key => $value) {
    $a=$nom[$key];?>

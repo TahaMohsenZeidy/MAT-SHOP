@@ -28,26 +28,23 @@
 
 								<li class="currency">
 									<a href="#">
-										usd
+										USD
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="currency_selection">
-										<li><a href="#">cad</a></li>
-										<li><a href="#">aud</a></li>
-										<li><a href="#">eur</a></li>
-										<li><a href="#">gbp</a></li>
+										<li><a href="#">TND</a></li>
+										<li><a href="#">EUR</a></li>
 									</ul>
 								</li>
 								<li class="language">
 									<a href="#">
-										English
+										Francias
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="language_selection">
-										<li><a href="#">French</a></li>
-										<li><a href="#">Italian</a></li>
-										<li><a href="#">German</a></li>
-										<li><a href="#">Spanish</a></li>
+										<li><a href="#">English</a></li>
+										<li><a href="#">Arabe</a></li>
+
 									</ul>
 								</li>
 								<li class="account">
@@ -77,7 +74,7 @@
 
 		<!-- Main Navigation -->
 
-		<div class="main_nav_container">
+		<div class="main_nav_container" style="text-decoration:none;">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12 text-right">

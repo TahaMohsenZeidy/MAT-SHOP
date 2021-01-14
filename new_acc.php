@@ -11,19 +11,26 @@ require_once('src/functions.php');
         <div class="sidebar">
             <div class="sidebar_section">
                 <div class="sidebar_title">
-                    <h5>Categories</h5>
+                    <h4>Categories</h4>
                 </div>
                 <ul class="sidebar_categories">
-                    <li class="active"><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>Offres</a></li>
+                    <li class="active" ><a id="cats" href="#" style="font-size:20px;"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>Offres</a></li>
                     <?php foreach($category as $id => $name): ?>
-                        <li><a href="<?php echo $id + 1; ?>"><?php echo $name['name']; ?></a></li>
+                        <li><a id="cats" style="font-size:15px;" href="<?php echo $id + 1; ?>"><?php echo $name['name']; ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
+            <style>
+                #cats:hover{
+                    color:blue!important;
+                    font-size:25px;
+                    text-decoration:none;
+                }
+            </style>
             <!-- Price Range Filtering -->
             <div class="sidebar_section">
 				<div class="sidebar_title">
-                    <h5>Filtrer par prix</h5>
+                    <h5 id="fab">Filtrer par prix</h5>
 				</div>
 					<p>
                     <form method="POST" action="getPriceRange.php">
@@ -40,11 +47,12 @@ require_once('src/functions.php');
                     <h5>Fabricant</h5>
                 </div>
                 <ul class="checkboxes">
-                    <li class="active"><input type="checkbox" class="fa fa-square-o" aria-hidden="true"></input><span> &nbsp;&nbsp;&nbsp; Acer</span></li>
-                    <li><input onchange="mainInfo(this.value);" type="checkbox" class="fa fa-square-o" aria-hidden="true"></input><span>&nbsp;&nbsp;&nbsp; Adata</span></li>
-                    <li><input type="checkbox" class="fa fa-square-o" aria-hidden="true"></input><span> &nbsp;&nbsp;&nbsp;Advanvce</span></li>
-                    <li><input type="checkbox" class="fa fa-square-o" aria-hidden="true"></input><span>&nbsp;&nbsp;&nbsp;HaveIt</span></li>
-                    <li><input type="checkbox" class="fa fa-square-o" aria-hidden="true"></input><span>&nbsp;&nbsp;&nbsp;AlsEye</span></li>
+                    <li class="active">
+                    <input name="Samsung" type="checkbox" onchange="mainInfo(name);" class="fa fa-square-o" aria-hidden="true"></input><span> &nbsp;&nbsp;&nbsp; Samsung</span></li>
+                    <li><input name="Toshiba" onchange="mainInfo(name);" type="checkbox" class="fa fa-square-o" aria-hidden="true"></input><span>&nbsp;&nbsp;&nbsp; Toshiba</span></li>
+                    <li><input name="Advance" onchange="mainInfo(name);" type="checkbox" class="fa fa-square-o" aria-hidden="true"></input><span> &nbsp;&nbsp;&nbsp;Advanvce</span></li>
+                    <li><input name="HaveIt" onchange="mainInfo(name);" type="checkbox" class="fa fa-square-o" aria-hidden="true"></input><span>&nbsp;&nbsp;&nbsp;HaveIt</span></li>
+                    <li id="color"><input name="Dell" onchange="mainInfo(name);" type="checkbox" class="fa fa-square-o" aria-hidden="true"></input><span>&nbsp;&nbsp;&nbsp;Dell</span></li>
                 </ul>
             </div>
             <style>
@@ -93,16 +101,17 @@ require_once('src/functions.php');
                         <div class="product_sorting_container product_sorting_container_top">
                             <ul class="product_sorting">
                                 <li>
-                                    <span class="type_sorting_text">Default Sorting</span>
+                                    <span class="type_sorting_text">Filtre Par Défaut</span>
                                     <i class="fa fa-angle-down"></i>
                                     <ul class="sorting_type">
-                                        <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>Default Sorting</span></li>
-                                        <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span>Price</span></li>
-                                        <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span>Product Name</span></li>
+                                        <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span><a>Filtre Par Défaut</a></span></li>
+                                        <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span><a href="#prix">Filtre Par Prix</a></span></li>
+                                        <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span><a href="#color">Filtre Par Couleur</a></span></li>
+                                        <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span><a href="#fab">Filtre Par Fabricant</a></span></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <span>Show</span>
+                                    <span>Vue</span>
                                     <span class="num_sorting_text">6</span>
                                     <i class="fa fa-angle-down"></i>
                                     <ul class="sorting_num">
@@ -134,12 +143,19 @@ require_once('src/functions.php');
                                                 <h6>Obtenez les meilleurs produits en un seul clic</h6>
                                                 <h2>Réductions jusqu'a</h2>
                                                 <h1 style="left: 50px">50 %</h1>
-                                                <div class="red_button shop_now_button" style="top:-30px;"><a href="#">shop now</a></div>
+                                                <div class="red_button shop_now_button" style="top:-30px;"><a id="dogs" href="produit.php">shop now</a></div>
+                                            <style>
+                                                #dogs:hover{
+                                                    text-decoration:none;
+                                                    color:white;
+                                                    background-color:red;
+                                                }
+                                            </style>
                                             </div>
                                         </div>
                                     </div>
                                     <br>
-                                    <h1 style="color: red;" style="text-align: center; color:red;"><a href="#">Get Discounts Now</a></h1>
+                                    <h1 style="color:red;">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:blue;">Merci <span><span style="color:black;"> Pour<span><span style="color:blue;"> Votre<span><span style="color:black;"> Confiance<span><span style="color:blue;"> .<span></h1>
                                 </div>
                             </div>
                             <!--------Slider Ends---------->
@@ -148,12 +164,12 @@ require_once('src/functions.php');
 
                             <!-- New Arrivals -->
 
-                            <div class="new_arrivals">
+                            <div class="new_arrivals" id="prix">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col text-center">
                                             <div class="section_title new_arrivals_title">
-                                                <h2 id="arrivals_changing">New Arrivals</h2>
+                                                <h2 id="arrivals_changing">Nos Produits</h2>
                                             </div>
                                         </div>
                                     </div>
@@ -161,10 +177,10 @@ require_once('src/functions.php');
                                         <div class="col text-center">
                                             <div class="new_arrivals_sorting">
                                                 <ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
-                                                    <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">all</li>
-                                                    <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".women">women's</li>
-                                                    <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".accessories">accessories</li>
-                                                    <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men">men's</li>
+                                                    <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">Tout</li>
+                                                    <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".women">PC</li>
+                                                    <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".accessories">Ordinateurs</li>
+                                                    <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men">Smart Phone</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -184,12 +200,7 @@ require_once('src/functions.php');
 
                         <div class="product-grid">
 
-                            <!-- Product 1 -->
-                            <div class="super_container">
-                            <?php echo produit(); ?>
-                            </div>
-                        <!-- Product Sorting -->
-
+                        <h1>ma7bee ma7bee</h1>
                         <div class="product_sorting_container product_sorting_container_bottom clearfix">
                             <ul class="product_sorting">
                                 <li>
@@ -235,7 +246,7 @@ require_once('src/functions.php');
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="deal_ofthe_week_img">
-                        <img src="images/deal_ofthe_week.png" alt="">
+                        <img src="image/samsung A51.jpg" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6 text-right deal_ofthe_week_col">
@@ -261,7 +272,7 @@ require_once('src/functions.php');
                                 <div class="timer_unit">Sec</div>
                             </li>
                         </ul>
-                        <div class="red_button deal_ofthe_week_button"><a href="#">shop now</a></div>
+                        <div class="red_button deal_ofthe_week_button"><a href="1">shop now</a></div>
                     </div>
                 </div>
             </div>
@@ -486,38 +497,38 @@ require_once('src/functions.php');
             <div class="row">
                 <div class="col text-center">
                     <div class="section_title">
-                        <h2>Latest Blogs</h2>
+                        <h2>Nos Produits Spéciales</h2>
                     </div>
                 </div>
             </div>
             <div class="row blogs_container">
                 <div class="col-lg-4 blog_item_col">
                     <div class="blog_item">
-                        <div class="blog_background" style="background-image:url(images/blog_1.jpg)"></div>
+                        <div class="blog_background" style="background-image:url(image/pc/pc1dell.jpg)"></div>
                         <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
-                            <h4 class="blog_title">Here are the trends I see coming this fall</h4>
+                            <h4 class="blog_title">Portables Inspiron optimisés par les processeurs Intel®  CoreTM  7e génération</h4>
                             <span class="blog_meta">by admin | dec 01, 2017</span>
-                            <a class="blog_more" href="#">Read more</a>
+                            <a class="blog_more" href="4">Read more</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 blog_item_col">
                     <div class="blog_item">
-                        <div class="blog_background" style="background-image:url(images/blog_2.jpg)"></div>
+                        <div class="blog_background" style="background-image:url(image/pc/pc2dell.jpg)"></div>
                         <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
-                            <h4 class="blog_title">Here are the trends I see coming this fall</h4>
+                            <h4 class="blog_title">Portables Inspiron optimisés par les processeurs Intel®  CoreTM  7e génération</h4>
                             <span class="blog_meta">by admin | dec 01, 2017</span>
-                            <a class="blog_more" href="#">Read more</a>
+                            <a class="blog_more" href="4">Read more</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 blog_item_col">
                     <div class="blog_item">
-                        <div class="blog_background" style="background-image:url(images/blog_3.jpg)"></div>
+                        <div class="blog_background" style="background-image:url(image/pc/pc4dell.jpg)"></div>
                         <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
-                            <h4 class="blog_title">Here are the trends I see coming this fall</h4>
+                            <h4 class="blog_title">Portables Inspiron optimisés par les processeurs Intel®  CoreTM  7e génération</h4>
                             <span class="blog_meta">by admin | dec 01, 2017</span>
-                            <a class="blog_more" href="#">Read more</a>
+                            <a class="blog_more" href="4">Read more</a>
                         </div>
                     </div>
                 </div>
@@ -571,7 +582,6 @@ require_once('src/functions.php');
     </div>
 
     <!----------hedhy ekher partie m louta kemlet----->
-
     <!-- Footer -->
     <?php 
     require_once('footer.php');
@@ -579,25 +589,18 @@ require_once('src/functions.php');
     ?>
     </div>
     <script>
+
     function mainInfo(id) {
         $.ajax({
             type: "GET",
             url: "dummy.php",
-            data: "mainid =" + id,
+            data: "id =" +id,
             success: function(result) {
-                $(".new_arrivals_title").html(result);
-                alert(data);
+                $(".product-grid").html(result);
             }
         });
     };
     </script>
-    <?php
-    echo "am here";
-    if(isset($_GET['mainid'])){
-        echo "am not here though";
-        mainInfo($_GET['mainid']);
-    }
-?>
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="styles/bootstrap4/popper.js"></script>
     <script src="styles/bootstrap4/bootstrap.min.js"></script>

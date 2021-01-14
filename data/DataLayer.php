@@ -425,6 +425,25 @@ class DataLayer{
 
     }
 
+    function getProductsByF($fab){
+        $sql = "SELECT * FROM product WHERE fabricant='$fab'";
+        try {
+           $result = $this->connexion->prepare($sql);
+           $var = $result->execute();
+           $data = $result->fetchAll(PDO::FETCH_ASSOC);//un tableau de la base de données
+        //    print_r($data);
+           if($data){
+               return $data;
+
+           }else{
+               return FALSE;
+           }
+
+       } catch (PDOException $th) {
+           return NULL;
+       }
+    }
+
  function rechercher($name){
 
         $sql = "SELECT * FROM product WHERE name LIKE '%$name%'";
