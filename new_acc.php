@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include('head.php'); 
+<?php include('head.php');
 require_once('src/functions.php');
 ?>
 <body>
@@ -583,7 +583,7 @@ require_once('src/functions.php');
 
     <!----------hedhy ekher partie m louta kemlet----->
     <!-- Footer -->
-    <?php 
+    <?php
     require_once('footer.php');
 
     ?>
@@ -621,6 +621,9 @@ require_once('src/functions.php');
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 
-
+    <div style="right:100px;" class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
+    <h5>  <span>nombre de visiteurs</span><img src="https://hitwebcounter.com/counter/counter.php?page=7737601&style=0011&nbdigits=5&type=page&initCount=0" title="Free Counter" Alt="web counter"   border="0" />
+    </h5>
+    </div>
 </body>
 </html>

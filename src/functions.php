@@ -120,7 +120,7 @@ function inscription(){
       <!-- Input -->
       <div class=" mb-3">
         <div class="input-group input-group form">
-          <input type="password" class="form-control " name="password"  required="" placeholder="Entrez votre mot de passe" aria-label="Entrez votre mot de passe">
+          <input type="password" class="form-control validate" id="exampleInputPassword1" name="password"  required="" placeholder="Entrez votre mot de passe" aria-label="Entrez votre mot de passe">
         </div>
       </div>
       <!-- End Input -->
