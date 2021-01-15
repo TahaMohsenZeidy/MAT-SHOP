@@ -490,6 +490,22 @@ function newsletter(){
 }
 
 function generateRandomProduct(){
+  if(!isset($_SESSION['panier'])){
+    $tab=array();
+    //echo"<br><br><br><br><br> non";
+    //print_r($_SESSION);
+    $_SESSION['panier']=$tab;
+    $_SESSION['size']=0;
+    }
+    else{
+      if(isset($_POST['id'])){
+      // echo"<br><br><br><br><br> oui";
+
+      array_push($_SESSION["panier"],$_POST["id"]);
+      // print_r($_SESSION["panier"]);
+      $_SESSION['size']=$_SESSION['size']+1;
+    }  
+  }
   global $model;
   $data=$model->getProduct();
   $randIndex = array_rand($data, 9);
@@ -720,6 +736,57 @@ return "
   </div>
 </div> ";
 }
+
+
+//this function gets the best selling products
+
+function getBestSellers(){
+  global $model;
+  $data=$model->getorders();
+  //print_r($data);
+  foreach ($data as $key => $value) {
+    $redon[$key]=$value["id_product"];
+  }
+  $result=array_count_values($redon);//[id_product]=>nbre de redon
+  arsort($result);
+  $images = array();
+  $prices = array();
+  $names = array();
+  $stock = array();
+  foreach ($result as $key => $value) {
+    $oneprod=$model->getProduct(null,null,$key);
+    array_push($images, $oneprod[0]['image']);
+    array_push($prices, $oneprod[0]['price']);
+    array_push($names, $oneprod[0]['name']);
+    array_push($stock, $oneprod[0]['stock']);
+  }
+  $output="";
+  for ($x = 0; $x <= 5; $x++) {  
+    $discount = $prices[$x]+15;    
+    $output.=
+      "
+      <div class=".'"'."owl-item product_slider_item".'"'.">
+      <div class=".'"'."product-item".'"'.">
+          <div class=".'"'."product discount".'"'.">
+              <div class=".'"'."product_image".'"'.">
+                  <img src=".'"produit/'.$images[$x].'"'." >
+              </div>
+              <div class=".'"'."favorite favorite_left".'"'."></div>
+              <div class=".'"'."product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center".'"'."><span>".$stock[$x]."</span></div>
+              <div class=".'"'."product_info".'"'.">
+                  <h6 class=".'"'."product_name".'"'."><a>".$names[$x]."</a></h6>
+                  <div class=".'"'."product_price".'"'.">".$prices[$x]." TND<span>".$discount." TND</span></div>
+              </div>
+          </div>
+      </div>
+    </div>
+      ";
+  }
+  return $output;
+}
+
+
+
 /*******profil du client *****/
 function account(){
 if(isset($_SESSION["connect"])){
