@@ -312,7 +312,7 @@ function achat(){
   $infoclient=$model->getCustomer($idCustomer);
   $to_email =$email ;
   $subject = "vos achats";
-  $body = "dans deux jours sera delivrer \n contact:24 043 800\n";
+  $body = "contact:24 043 800\n";
   $headers = "From: ayoubyaich85@gmail.com";
   //print_r($infoclient);
   if($_SESSION["connect"]!="oui" ){
@@ -325,15 +325,22 @@ function achat(){
 
   elseif(isset($_POST["id1"])){
     $data=$model->getProduct(null,null,$_POST["id1"]);
+    $stock=$data[0]["stock"];
+    if($stock>=$_POST["qte"]){
+    $stock=$stock-$value["quantity"];
     $idprod=$data["0"]["id"];
     $promo=$data["0"]["price"]*$_POST["qte"]-($data["0"]["price"]*$data["0"]["promotion"]/100)*$_POST["qte"];
     $body .= "nom du produit:".$data["0"]["name"]." =>  quantité:".$_POST["qte"] ."\n prix=".$promo ."\n";
     $t=$model->createOrders($idCustomer,$idprod,$_POST["qte"],$promo);
     mail($to_email, $subject, $body, $headers);
+    $model->updatestock($idprod,$stock);
     if (mail($to_email, $subject, $body, $headers)) {
       echo "<script>
       alert('verifier votre email');
       </script>";
+    }}else{
+      $body .="pas de stock disponible actuellement pour la livraison à domicile essayer ultérieurement";
+      mail($to_email, $subject, $body, $headers);
     }
     Header("Location:/MVC/showpanier.php");
   }
@@ -890,93 +897,6 @@ if($r){
 Header("Location:/MVC/account.php");
 //return $resultat;
 }
-
-/************     partie admin    *******************/
-function admin(){
-  $resultat="
-  <div class='mx-auto' style='width: 500px;'>
-  <div class='card text-white bg-primary' style='width: 30rem;'>
-  <div class='card-body'>
-  <h5 class='card-title text-white'>inscrivez-vous</h5>";
-  if(isset($_SESSION["falsemdp"]) ){
-    $resultat .='<div class="alert alert-danger" role="alert">
-    mot de passe incorrect
-    </div>';}
-  $resultat .="<form  action='authentifieradmin.php' method='post'>
-    <!-- Input -->
-    <div class='mb-3'>
-      <div class='input-group input-group form'>
-        <input type='email' class='form-control' name='email'  placeholder='Entrez votre adresse email' aria-label='Entrez votre adresse email'>
-      </div>
-    </div>
-    <!-- End Input -->
-
-    <!-- Input -->
-    <div class='mb-3'>
-      <div class='input-group input-group form'>
-        <input type='password' class='form-control' name='password'   placeholder='Entrez votre mot de passe' aria-label='Entrez votre mot de passe'>
-      </div>
-    </div>
-    <!-- End Input -->
-
-    <button type='submit' class='btn btn-block btn-primary'>S'inscrire</button>
-  </form>
-  </div>
-  </div>
-</div>";
-return $resultat;
-}
-
-function authentifieradmin(){
-  global $model;
-  if(isset($_POST["email"]) && isset($_POST["password"])){
-$email = $_POST["email"];
-$password = $_POST["password"];
-$data=$model->authentifierAdmin($email,$password);}
-if(isset ($data)){
-if($data){
-//session_start();
-//$_SESSION["nom"]=$data["firstname"];
-$_SESSION["emailadmin"]=$data["email"];
-//$_SESSION["connect"]="oui";
-//print_r($_SESSION);
-Header("Location:/MVC/dashboard.php");
-}
-else{
-  $_SESSION["falsemdp"]="oui";
-  Header("Location:/MVC/admin.php");
-}}
-}
-function dashboard(){
-global $model;
-include "views/dashboard.php";
-exit(0);
-}
-function modifproduit(){
-global $model;
-include "views/modifproduit.php";
-exit(0);
-}
-function Customers(){
-global $model;
-include "views/Customers.php";
-exit(0);
-}
-function categoryadmin(){
-global $model;
-include "views/categoryadmin.php";
-exit(0);
-}
-function achatadmin(){
-global $model;
-include "views/achatadmin.php";
-exit(0);
-}
-function ajouteradmin(){
-global $model;
-include "views/ajouteradmin.php";
-exit(0);
-}
 function promotion(){
    if(!isset($_SESSION['panier'])){
                                    $tab=array();
@@ -1069,4 +989,91 @@ return "
 
 
 
+}
+
+/************     partie admin    *******************/
+function admin(){
+  $resultat="
+  <div class='mx-auto' style='width: 500px;'>
+  <div class='card text-white bg-primary' style='width: 30rem;'>
+  <div class='card-body'>
+  <h5 class='card-title text-white'>inscrivez-vous</h5>";
+  if(isset($_SESSION["falsemdp"]) ){
+    $resultat .='<div class="alert alert-danger" role="alert">
+    mot de passe incorrect
+    </div>';}
+  $resultat .="<form  action='authentifieradmin.php' method='post'>
+    <!-- Input -->
+    <div class='mb-3'>
+      <div class='input-group input-group form'>
+        <input type='email' class='form-control' name='email'  placeholder='Entrez votre adresse email' aria-label='Entrez votre adresse email'>
+      </div>
+    </div>
+    <!-- End Input -->
+
+    <!-- Input -->
+    <div class='mb-3'>
+      <div class='input-group input-group form'>
+        <input type='password' class='form-control' name='password'   placeholder='Entrez votre mot de passe' aria-label='Entrez votre mot de passe'>
+      </div>
+    </div>
+    <!-- End Input -->
+
+    <button type='submit' class='btn btn-block btn-primary'>S'inscrire</button>
+  </form>
+  </div>
+  </div>
+</div>";
+return $resultat;
+}
+
+function authentifieradmin(){
+  global $model;
+  if(isset($_POST["email"]) && isset($_POST["password"])){
+$email = $_POST["email"];
+$password = $_POST["password"];
+$data=$model->authentifierAdmin($email,$password);}
+if(isset ($data)){
+if($data){
+//session_start();
+//$_SESSION["nom"]=$data["firstname"];
+$_SESSION["emailadmin"]=$data["email"];
+//$_SESSION["connect"]="oui";
+//print_r($_SESSION);
+Header("Location:/MVC/dashboard.php");
+}
+else{
+  $_SESSION["falsemdp"]="oui";
+  Header("Location:/MVC/admin.php");
+}}
+}
+function dashboard(){
+global $model;
+include "views/dashboard.php";
+exit(0);
+}
+function modifproduit(){
+global $model;
+include "views/modifproduit.php";
+exit(0);
+}
+function Customers(){
+global $model;
+include "views/Customers.php";
+exit(0);
+}
+function categoryadmin(){
+global $model;
+include "views/categoryadmin.php";
+exit(0);
+}
+function achatadmin(){
+global $model;
+include "views/achatadmin.php";
+exit(0);
+}
+function ajouteradmin(){
+global $model;
+include "views/ajouteradmin.php";
+exit(0);
 }
