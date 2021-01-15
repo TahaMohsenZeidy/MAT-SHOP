@@ -28,11 +28,11 @@
 
 								<li class="currency">
 									<a href="#">
-										USD
+										TND
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="currency_selection">
-										<li><a href="#">TND</a></li>
+										<li><a href="#">USD</a></li>
 										<li><a href="#">EUR</a></li>
 									</ul>
 								</li>
@@ -78,21 +78,36 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12 text-right">
-						<div class="logo_container">
-							<a href="#">colo<span>shop</span></a>
+						<div class="logo_container" >
+							<a id="yeah" href="http://localhost/MVC/">MAT<span>SHOP</span></a>
+							<style>
+								#yeah:hover{
+									text-decoration:none;
+									color:red;
+								}
+								#yeah span:hover{
+									color:black;
+								}
+								#yeah li a:hover{
+									text-decoration:none;
+									color:black;
+									font-weight:bold;
+								}
+							</style>
+
 						</div>
-						<nav class="navbar">
-							<ul class="navbar_menu">
+						<nav class="navbar" style="height:70px;">
+							<ul class="navbar_menu" id="yeah">
 								<li><a href="<?php echo "http://localhost/MVC/"; ?>">Home</a></li>
 
 								<li><a href="produit.php">Produits</a></li>
 								<li><a href="promotion.php">Promotion</a></li>
 								<li><a href="contact.php">Contact</a></li>
-								<li> <form method="post" action="recherche.php">
+								<li style="postision:relative;"> <form method="post" action="recherche.php">
 
-								<input size='30' type="text" name="recherche" class=" auto-save form-control"   placeholder="Rechercher un produit " ></li>
+								<input style="position:relative; height:37px; top:2px;" size='30' type="text" name="recherche" class=" auto-save form-control"   placeholder="Rechercher un produit " ></li>
 
-								<li><button id="boo" class='btn btn-danger' style="width: 60px; background: #fe4c50" type="submit"><i class="fa fa-search"  aria-hidden="true"></i></button>
+								<li ><button id="boo" class='btn btn-danger' style="width: 65px; height:35px; background: #fe4c50 margin:0px;" type="submit"><i class="fa fa-search"  aria-hidden="true"></i></button>
 								<style>
 								#boo:hover{
 									color:red;

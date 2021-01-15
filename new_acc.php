@@ -36,7 +36,11 @@ require_once('src/functions.php');
                     <form method="POST" action="getPriceRange.php">
 						<input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;" name="amount">
 					</p>
-					<div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 0%; width: 58%;"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 0%;"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 58%;"></span></div>
+					<div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" style="background-color:#FF6347;">
+                    <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 0%; width: 58%;"></div>
+                    <span tabindex="0" class="ui-slider-handle ui-corner-all" style="left: 0%;"></span>
+                    <span tabindex="0" class="ui-slider-handle ui-corner-all" style="left: 58%;"></span>
+                    </div>
                 <div class="filter_button"><span><button style="border:none; background-color:transparent; color:white; font-size:20px;" type="submit">Filtrer</button></span></div>
                 </form>
 			</div>
@@ -88,7 +92,7 @@ require_once('src/functions.php');
 
         <!-- Main Content -->
 
-        <div class="main_content">
+        <div class="main_content" style="top:-20px;">
 
             <!-- Products -->
 
