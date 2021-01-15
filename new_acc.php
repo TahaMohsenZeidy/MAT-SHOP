@@ -136,10 +136,10 @@ require_once('src/functions.php');
 
                             <!-- Slider -->
                             <div class="main_slider" style="background-image:url(images/gad5.jpg); top:-130px; height:450px; left:70px; width:900px;">
-                                <div class="container fill_height">
+                                <div class="container fill_height" >
                                     <div class="row align-items-center fill_height">
                                         <div class="col">
-                                            <div class="main_slider_content">
+                                            <div class="main_slider_content" style="top:-30px;">
                                                 <h6>Obtenez les meilleurs produits en un seul clic</h6>
                                                 <h2>Réductions jusqu'a</h2>
                                                 <h1 style="left: 50px">50 %</h1>
@@ -155,7 +155,7 @@ require_once('src/functions.php');
                                         </div>
                                     </div>
                                     <br>
-                                    <h1 style="color:red;">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:blue;">Merci <span><span style="color:black;"> Pour<span><span style="color:blue;"> Votre<span><span style="color:black;"> Confiance<span><span style="color:blue;"> .<span></h1>
+                                    <h1 style="color:red;">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#fe4c50;">Merci <span><span style="color:black;"> Pour<span><span style="color:#fe4c50;"> Votre<span><span style="color:black;"> Confiance<span><span style="color:blue;"> .<span></h1>
                                 </div>
                             </div>
                             <!--------Slider Ends---------->
@@ -164,7 +164,7 @@ require_once('src/functions.php');
 
                             <!-- New Arrivals -->
 
-                            <div class="new_arrivals" id="prix">
+                            <div class="new_arrivals" id="prix" style="top:-24px;">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col text-center">
@@ -173,38 +173,21 @@ require_once('src/functions.php');
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row align-items-center">
-                                        <div class="col text-center">
-                                            <div class="new_arrivals_sorting">
-                                                <ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
-                                                    <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">Tout</li>
-                                                    <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".women">PC</li>
-                                                    <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".accessories">Ordinateurs</li>
-                                                    <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men">Smart Phone</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <br>
                                 </div>
                             </div>
                             <!------Another Slider Ends--->
 
                         </div>
                         <!-- Product Grid -->
-
-                        <div class="product-grid">
-
-                        <h1>ma7bee ma7bee</h1>
+                        <!--Generating Random Products--->
+                        <?php
+                        echo generateRandomProduct();
+                        ?>
                         <div class="product_sorting_container product_sorting_container_bottom clearfix">
                             <ul class="product_sorting">
                                 <li>
-                                    <span>Show:</span>
+                                    <span>Vue:</span>
                                     <span class="num_sorting_text">04</span>
                                     <i class="fa fa-angle-down"></i>
                                     <ul class="sorting_num">
@@ -215,7 +198,7 @@ require_once('src/functions.php');
                                     </ul>
                                 </li>
                             </ul>
-                            <span class="showing_results">Showing 1–3 of 12 results</span>
+                            <span class="showing_results">Appercu 1–3 de 12 resultats</span>
                             <div class="pages d-flex flex-row align-items-center">
                                 <div class="page_current">
                                     <span>1</span>
@@ -225,7 +208,7 @@ require_once('src/functions.php');
                                         <li><a href="#">3</a></li>
                                     </ul>
                                 </div>
-                                <div class="page_total"><span>of</span> 3</div>
+                                <div class="page_total"><span>De</span> 3</div>
                                 <div id="next_page_1" class="page_next"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
                             </div>
 
@@ -246,7 +229,7 @@ require_once('src/functions.php');
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="deal_ofthe_week_img">
-                        <img src="image/samsung A51.jpg" alt="">
+                        <img src="image/pc/most.jpg" style="width:550px;" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6 text-right deal_ofthe_week_col">
@@ -256,23 +239,23 @@ require_once('src/functions.php');
                         </div>
                         <ul class="timer">
                             <li class="d-inline-flex flex-column justify-content-center align-items-center">
-                                <div id="day" class="timer_num">03</div>
+                                <div id="day" class="timer_num" style="color:red;">03</div>
                                 <div class="timer_unit">Day</div>
                             </li>
                             <li class="d-inline-flex flex-column justify-content-center align-items-center">
-                                <div id="hour" class="timer_num">15</div>
+                                <div id="hour" class="timer_num" style="color:red;">15</div>
                                 <div class="timer_unit">Hours</div>
                             </li>
                             <li class="d-inline-flex flex-column justify-content-center align-items-center">
-                                <div id="minute" class="timer_num">45</div>
+                                <div id="minute" class="timer_num" style="color:red;">45</div>
                                 <div class="timer_unit">Mins</div>
                             </li>
                             <li class="d-inline-flex flex-column justify-content-center align-items-center">
-                                <div id="second" class="timer_num">23</div>
+                                <div id="second" class="timer_num" style="color:red;">23</div>
                                 <div class="timer_unit">Sec</div>
                             </li>
                         </ul>
-                        <div class="red_button deal_ofthe_week_button"><a href="1">shop now</a></div>
+                        <div class="red_button deal_ofthe_week_button"><a href="1" style="margin:20px;" id="dogs">shop now</a></div>
                     </div>
                 </div>
             </div>
@@ -284,6 +267,15 @@ require_once('src/functions.php');
     <!----------hedhy ekher partie m louta----->
 
     <!-- Best Sellers -->
+        
+
+            <!-----khedmet el best sellers------>
+            <?php
+            getBestSellers();
+            
+            ?>
+            <!-----khedmet el best sellers------>
+
 
     <div class="best_sellers">
         <div class="container">
@@ -298,183 +290,11 @@ require_once('src/functions.php');
                 <div class="col">
                     <div class="product_slider_container">
                         <div class="owl-carousel owl-theme product_slider">
-
                             <!-- Slide 1 -->
-
-                            <div class="owl-item product_slider_item">
-                                <div class="product-item">
-                                    <div class="product discount">
-                                        <div class="product_image">
-                                            <img src="images/product_1.png" alt="">
-                                        </div>
-                                        <div class="favorite favorite_left"></div>
-                                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
-                                        <div class="product_info">
-                                            <h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
-                                            <div class="product_price">$520.00<span>$590.00</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Slide 2 -->
-
-                            <div class="owl-item product_slider_item">
-                                <div class="product-item women">
-                                    <div class="product">
-                                        <div class="product_image">
-                                            <img src="images/product_2.png" alt="">
-                                        </div>
-                                        <div class="favorite"></div>
-                                        <div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
-                                        <div class="product_info">
-                                            <h6 class="product_name"><a href="single.html">Samsung CF591 Series Curved 27-Inch FHD Monitor</a></h6>
-                                            <div class="product_price">$610.00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Slide 3 -->
-
-                            <div class="owl-item product_slider_item">
-                                <div class="product-item women">
-                                    <div class="product">
-                                        <div class="product_image">
-                                            <img src="images/product_3.png" alt="">
-                                        </div>
-                                        <div class="favorite"></div>
-                                        <div class="product_info">
-                                            <h6 class="product_name"><a href="single.html">Blue Yeti USB Microphone Blackout Edition</a></h6>
-                                            <div class="product_price">$120.00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Slide 4 -->
-
-                            <div class="owl-item product_slider_item">
-                                <div class="product-item accessories">
-                                    <div class="product">
-                                        <div class="product_image">
-                                            <img src="images/product_4.png" alt="">
-                                        </div>
-                                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
-                                        <div class="favorite favorite_left"></div>
-                                        <div class="product_info">
-                                            <h6 class="product_name"><a href="single.html">DYMO LabelWriter 450 Turbo Thermal Label Printer</a></h6>
-                                            <div class="product_price">$410.00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Slide 5 -->
-
-                            <div class="owl-item product_slider_item">
-                                <div class="product-item women men">
-                                    <div class="product">
-                                        <div class="product_image">
-                                            <img src="images/product_5.png" alt="">
-                                        </div>
-                                        <div class="favorite"></div>
-                                        <div class="product_info">
-                                            <h6 class="product_name"><a href="single.html">Pryma Headphones, Rose Gold & Grey</a></h6>
-                                            <div class="product_price">$180.00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Slide 6 -->
-
-                            <div class="owl-item product_slider_item">
-                                <div class="product-item accessories">
-                                    <div class="product discount">
-                                        <div class="product_image">
-                                            <img src="images/product_6.png" alt="">
-                                        </div>
-                                        <div class="favorite favorite_left"></div>
-                                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
-                                        <div class="product_info">
-                                            <h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
-                                            <div class="product_price">$520.00<span>$590.00</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Slide 7 -->
-
-                            <div class="owl-item product_slider_item">
-                                <div class="product-item women">
-                                    <div class="product">
-                                        <div class="product_image">
-                                            <img src="images/product_7.png" alt="">
-                                        </div>
-                                        <div class="favorite"></div>
-                                        <div class="product_info">
-                                            <h6 class="product_name"><a href="single.html">Samsung CF591 Series Curved 27-Inch FHD Monitor</a></h6>
-                                            <div class="product_price">$610.00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Slide 8 -->
-
-                            <div class="owl-item product_slider_item">
-                                <div class="product-item accessories">
-                                    <div class="product">
-                                        <div class="product_image">
-                                            <img src="images/product_8.png" alt="">
-                                        </div>
-                                        <div class="favorite"></div>
-                                        <div class="product_info">
-                                            <h6 class="product_name"><a href="single.html">Blue Yeti USB Microphone Blackout Edition</a></h6>
-                                            <div class="product_price">$120.00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Slide 9 -->
-
-                            <div class="owl-item product_slider_item">
-                                <div class="product-item men">
-                                    <div class="product">
-                                        <div class="product_image">
-                                            <img src="images/product_9.png" alt="">
-                                        </div>
-                                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
-                                        <div class="favorite favorite_left"></div>
-                                        <div class="product_info">
-                                            <h6 class="product_name"><a href="single.html">DYMO LabelWriter 450 Turbo Thermal Label Printer</a></h6>
-                                            <div class="product_price">$410.00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Slide 10 -->
-
-                            <div class="owl-item product_slider_item">
-                                <div class="product-item men">
-                                    <div class="product">
-                                        <div class="product_image">
-                                            <img src="images/product_10.png" alt="">
-                                        </div>
-                                        <div class="favorite"></div>
-                                        <div class="product_info">
-                                            <h6 class="product_name"><a href="single.html">Pryma Headphones, Rose Gold & Grey</a></h6>
-                                            <div class="product_price">$180.00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php
+                                echo getBestSellers();                            
+                            ?>
                         </div>
-
                         <!-- Slider Navigation -->
 
                         <div class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
@@ -497,14 +317,14 @@ require_once('src/functions.php');
             <div class="row">
                 <div class="col text-center">
                     <div class="section_title">
-                        <h2>Nos Produits Spéciales</h2>
+                        <h2>Nos Produit Spéciale</h2>
                     </div>
                 </div>
             </div>
             <div class="row blogs_container">
                 <div class="col-lg-4 blog_item_col">
                     <div class="blog_item">
-                        <div class="blog_background" style="background-image:url(image/pc/pc1dell.jpg)"></div>
+                        <div class="blog_background" style="background-image:url(image/pc/dell1.jpg)"></div>
                         <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
                             <h4 class="blog_title">Portables Inspiron optimisés par les processeurs Intel®  CoreTM  7e génération</h4>
                             <span class="blog_meta">by admin | dec 01, 2017</span>
@@ -514,7 +334,7 @@ require_once('src/functions.php');
                 </div>
                 <div class="col-lg-4 blog_item_col">
                     <div class="blog_item">
-                        <div class="blog_background" style="background-image:url(image/pc/pc2dell.jpg)"></div>
+                        <div class="blog_background" style="background-image:url(image/pc/dell2.jpg)"></div>
                         <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
                             <h4 class="blog_title">Portables Inspiron optimisés par les processeurs Intel®  CoreTM  7e génération</h4>
                             <span class="blog_meta">by admin | dec 01, 2017</span>
@@ -524,7 +344,7 @@ require_once('src/functions.php');
                 </div>
                 <div class="col-lg-4 blog_item_col">
                     <div class="blog_item">
-                        <div class="blog_background" style="background-image:url(image/pc/pc4dell.jpg)"></div>
+                        <div class="blog_background" style="background-image:url(image/pc/dell3.jpg)"></div>
                         <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
                             <h4 class="blog_title">Portables Inspiron optimisés par les processeurs Intel®  CoreTM  7e génération</h4>
                             <span class="blog_meta">by admin | dec 01, 2017</span>
@@ -589,6 +409,8 @@ require_once('src/functions.php');
     ?>
     </div>
     <script>
+ 
+
 
     function mainInfo(id) {
         $.ajax({
@@ -621,7 +443,7 @@ require_once('src/functions.php');
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 
-    <div style="right:100px;" class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
+    <div style="right:100px; height:80px;" class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
     <h5>  <span>nombre de visiteurs</span><img src="https://hitwebcounter.com/counter/counter.php?page=7737601&style=0011&nbdigits=5&type=page&initCount=0" title="Free Counter" Alt="web counter"   border="0" />
     </h5>
     </div>
