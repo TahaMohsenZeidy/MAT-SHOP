@@ -480,6 +480,22 @@ class DataLayer{
                 return NULL;
             }
         }
+        function getordersbycustomer($id){
+                $sql = "SELECT * FROM orders WHERE id_customers='$id'";
+                try {
+                    $result = $this->connexion->prepare($sql);
+                    $var = $result->execute();
+                    $data = $result->fetchAll(PDO::FETCH_ASSOC);
+                    if($data){
+                        return $data;
+                    }else{
+                        return FALSE;
+                    }
+
+                } catch (PDOException $th) {
+                    return NULL;
+                }
+            }
         function getadmins(){
                 $sql = "SELECT * FROM admin";
                 try {
@@ -513,6 +529,22 @@ class DataLayer{
         }
         function updatePromotion($newpromo,$id){
         $sql="UPDATE product SET promotion=$newpromo WHERE id=$id ";
+        try {
+            $result = $this->connexion->prepare($sql);
+            $var = $result->execute();
+            if($var){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+
+        } catch (PDOException $th) {
+            return NULL;
+        }
+
+        }
+        function updatestock($id,$stock){
+        $sql="UPDATE product SET stock=$stock WHERE id=$id ";
         try {
             $result = $this->connexion->prepare($sql);
             $var = $result->execute();

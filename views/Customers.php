@@ -6,42 +6,55 @@
 <?php include"headerAdmin.html";?>
 <div class="main_slider">
   <div class="container-fluid">
-      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
-        <div class="sidebar-sticky pt-3">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link active" href="dashboard.php">
-                <span data-feather="home"></span>
-                Dashboard <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="modifproduit.php">
-                <span data-feather="shopping-cart"></span>
-                Products
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="Customers.php">
-                <span data-feather="users"></span>
-                Customers
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="categoryadmin.php">
-                <span data-feather="bar-chart-2"></span>
-                categorie
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="ajouteradmin.php">
-                <span data-feather="bar-chart-2"></span>
-                ajouter admin
-              </a>
-            </li>
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block  sidebar collapse">
+      <div class="sidebar-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="dashboard.php">
+              <span data-feather="home"></span>
+              <i class="fas fa-tachometer-alt"></i>
+              Dashboard <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="modifproduit.php">
+              <span data-feather="shopping-cart"></span>
+              <i class="fas fa-cubes"></i>
+              Products
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Customers.php">
+              <span data-feather="users"></span>
+              <i class="fas fa-user"></i>
+              Customers
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categoryadmin.php">
+              <span data-feather="bar-chart-2"></span>
+              <i class="fas fa-cog"></i>
+              catégories
+            </a>
+          </li>
+          <?php /*if (session_status() == PHP_SESSION_NONE) {
+              session_start();
+          }
+          $a=$model->getAdmin($_SESSION["emailadmin"]);
+          if($a[0]["priorite"]==1):*/
+          ?>
+          <li class="nav-item">
+            <a class="nav-link" href="ajouteradmin.php">
+              <span data-feather="bar-chart-2"></span>
+             <i class="far fa-user"></i>
+              ajouter admin
+            </a>
+          </li>
+        <?php //endif; ?>
+        </ul>
 
-        </div>
-      </nav>
+      </div>
+    </nav>
 <?php
 $data=$model->getCustomer();
 $resultat ="
