@@ -444,6 +444,64 @@ class DataLayer{
        }
     }
 
+    function getProductsByC($col){
+        $sql = "SELECT * FROM product WHERE couleur='$col'";
+        try {
+           $result = $this->connexion->prepare($sql);
+           $var = $result->execute();
+           $data = $result->fetchAll(PDO::FETCH_ASSOC);//un tableau de la base de données
+        //    print_r($data);
+           if($data){
+               return $data;
+
+           }else{
+               return FALSE;
+           }
+
+       } catch (PDOException $th) {
+           return NULL;
+       }
+    }
+
+    function getFabs(){
+        $sql = "SELECT DISTINCT fabricant FROM product";
+        try {
+            $result = $this->connexion->prepare($sql);
+            $var = $result->execute();
+            $data = $result->fetchAll(PDO::FETCH_ASSOC);
+            if($data){
+                return $data;
+            }else{
+                return FALSE;
+            }
+
+        } catch (PDOException $th) {
+            return NULL;
+        }
+    }
+
+    function getCols(){
+        $sql = "SELECT DISTINCT couleur FROM product";
+        try {
+            $result = $this->connexion->prepare($sql);
+            $var = $result->execute();
+            $data = $result->fetchAll(PDO::FETCH_ASSOC);
+            if($data){
+                return $data;
+            }else{
+                return FALSE;
+            }
+
+        } catch (PDOException $th) {
+            return NULL;
+        }
+    }
+
+
+
+
+
+
  function rechercher($name){
 
         $sql = "SELECT * FROM product WHERE name LIKE '%$name%'";

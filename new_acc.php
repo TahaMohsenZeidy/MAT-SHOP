@@ -49,14 +49,19 @@ require_once('src/functions.php');
             <div class="sidebar_section">
                 <div class="sidebar_title">
                     <h5>Fabricant</h5>
+                    <?php
+                    $cols = explode(" ", getCouleurs());
+                    $fabs = explode(" ", getFabricants()); 
+                    ?>
                 </div>
-                <ul class="checkboxes">
-                    <li class="active">
-                    <input name="Samsung" type="checkbox" onchange="mainInfo(name);" class="fa fa-square-o" aria-hidden="true"></input><span> &nbsp;&nbsp;&nbsp; Samsung</span></li>
-                    <li><input name="Toshiba" onchange="mainInfo(name);" type="checkbox" class="fa fa-square-o" aria-hidden="true"></input><span>&nbsp;&nbsp;&nbsp; Toshiba</span></li>
-                    <li><input name="Advance" onchange="mainInfo(name);" type="checkbox" class="fa fa-square-o" aria-hidden="true"></input><span> &nbsp;&nbsp;&nbsp;Advanvce</span></li>
-                    <li><input name="HaveIt" onchange="mainInfo(name);" type="checkbox" class="fa fa-square-o" aria-hidden="true"></input><span>&nbsp;&nbsp;&nbsp;HaveIt</span></li>
-                    <li id="color"><input name="Dell" onchange="mainInfo(name);" type="checkbox" class="fa fa-square-o" aria-hidden="true"></input><span>&nbsp;&nbsp;&nbsp;Dell</span></li>
+                <ul class="checkboxes" id="color">
+                    <?php 
+                    foreach($fabs as $key => $val){
+                        if ($val != ""){
+                            echo "<li><input name=".'"'.$val.'"'." type=".'"'."checkbox".'"'." onchange=".'"'."fabr(name);".'"'." class=".'"'."fa fa-square-o".'"'." aria-hidden=".'"'."true".'"'."></input><span> &nbsp;&nbsp; ".$val."</span></li>";
+                        }    
+                    }
+                    ?>
                 </ul>
             </div>
             <style>
@@ -68,21 +73,17 @@ require_once('src/functions.php');
             <!-- Color -->
             <div class="sidebar_section">
                 <div class="sidebar_title">
-                    <h5>Color</h5>
+                    <h5>Couleur</h5>
                 </div>
-                <ul class="checkboxes">
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Black</span></li>
-                    <li class="active"><i class="fa fa-square" aria-hidden="true"></i><span>Pink</span></li>
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
-                </ul>
+                    <ul class="checkboxes">
+                    <?php 
+                    foreach($cols as $key => $val){
+                        if ($val != ""){
+                            echo "<li><input name=".'"'.$val.'"'." type=".'"'."checkbox".'"'." onchange=".'"'."colr(name);".'"'." class=".'"'."fa fa-square-o".'"'." aria-hidden=".'"'."true".'"'."></input><span> &nbsp;&nbsp; ".$val."</span></li>";
+                        }    
+                    }
+                    ?>
+                    </ul>
                 <div class="show_more">
                     <span><span>+</span>Show More</span>
                 </div>
@@ -114,29 +115,24 @@ require_once('src/functions.php');
                                         <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span><a href="#fab">Filtre Par Fabricant</a></span></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <span>Vue</span>
-                                    <span class="num_sorting_text">6</span>
-                                    <i class="fa fa-angle-down"></i>
-                                    <ul class="sorting_num">
-                                        <li class="num_sorting_btn"><span>6</span></li>
-                                        <li class="num_sorting_btn"><span>12</span></li>
-                                        <li class="num_sorting_btn"><span>24</span></li>
-                                    </ul>
-                                </li>
                             </ul>
                             <div class="pages d-flex flex-row align-items-center">
                                 <div class="page_current">
-                                    <span>1</span>
+                                    <span id="myspan">1</span>
                                     <ul class="page_selection">
                                         <li><a href="#">1</a></li>
                                         <li><a href="#">2</a></li>
                                         <li><a href="#">3</a></li>
                                     </ul>
                                 </div>
-                                <div class="page_total"><span>of</span> 3</div>
-                                <div id="next_page" class="page_next"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                <div class="page_total"><span>De</span> 3</div>
+                                <div id="next_page" class="page_next"><a href="#"><i onclick="test();" class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
                             </div>
+                            <script>
+                                function test(){
+                                    
+                                }
+                            </script>
 
                             <!-- Slider -->
                             <div class="main_slider" style="background-image:url(images/gad5.jpg); top:-130px; height:450px; left:70px; width:900px;">
@@ -413,13 +409,21 @@ require_once('src/functions.php');
     ?>
     </div>
     <script>
- 
 
-
-    function mainInfo(id) {
+    function fabr(id) {
         $.ajax({
             type: "GET",
-            url: "dummy.php",
+            url: "fabricant.php",
+            data: "id =" +id,
+            success: function(result) {
+                $(".product-grid").html(result);
+            }
+        });
+    };
+    function colr(id) {
+        $.ajax({
+            type: "GET",
+            url: "couleur.php",
             data: "id =" +id,
             success: function(result) {
                 $(".product-grid").html(result);
