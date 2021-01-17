@@ -117,32 +117,19 @@ require_once('src/functions.php');
                                 </li>
                             </ul>
                             <div class="pages d-flex flex-row align-items-center">
-                                <div class="page_current">
-                                    <span id="myspan">1</span>
-                                    <ul class="page_selection">
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                    </ul>
-                                </div>
-                                <div class="page_total"><span>De</span> 3</div>
-                                <div id="next_page" class="page_next"><a href="#"><i onclick="test();" class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                <div id="next_page" class="page_next"><a href="#"><i style="height:30px; widht:50px;" onclick="test();" class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
                             </div>
-                            <script>
-                                function test(){
-                                    
-                                }
-                            </script>
 
                             <!-- Slider -->
-                            <div class="main_slider" style="background-image:url(images/gad5.jpg); top:-130px; height:450px; left:70px; width:900px;">
+                            <div id="1" class="main_slider" style="background-image:url(images/gad5.jpg); top:-130px; height:450px; left:70px; width:900px;">
                                 <div class="container fill_height" >
                                     <div class="row align-items-center fill_height">
                                         <div class="col">
-                                            <div class="main_slider_content" style="top:-30px;">
-                                                <h6>Obtenez les meilleurs produits en un seul clic</h6>
-                                                <h2>Réductions jusqu'a</h2>
-                                                <h1 style="left: 50px">50 %</h1>
+                                            <div class="main_slider_content" style="top:-50px;">
+                                                <h6>Bonjour et Bienvenue Dans notre site !</h6>
+                                                <h2>Réductions jusqu'a 50%</h2>
+                                                <br>
+                                                <br>
                                                 <div class="red_button shop_now_button" style="top:-30px;"><a id="dogs" href="produit.php">shop now</a></div>
                                             <style>
                                                 #dogs:hover{
@@ -155,8 +142,22 @@ require_once('src/functions.php');
                                         </div>
                                     </div>
                                     <br>
-                                    <h1 style="color:red;">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#fe4c50;">Merci <span><span style="color:black;"> Pour<span><span style="color:#fe4c50;"> Votre<span><span style="color:black;"> Confiance<span><span style="color:blue;"> .<span></h1>
+                                    
                                 </div>
+                            </div>
+                            <div id="2" class="main_slider" style="display:none; background-image:url(images/hdLap1.jpg); top:-130px; height:450px; left:70px; width:900px; color:red;">
+                            </div>
+                            <script>
+                                function test(){
+                                    if($('#1').css('display')!='none'){
+                                        $('#2').html('<div><br><h2>Meilleur</h2><br><h2>Produit</h2><br><h2>Avec</h2><br><h2>Meilleur</h2><br><h2>Prix</h2></div>').show().siblings('div').hide();
+                                    }else if($('#2').css('display')!='none'){
+                                    $('#1').show().siblings('div').hide();
+                                    }
+                                }
+                            </script>
+                            <div style="text-align:center; top:-80px;">
+                            <h1 style="color:red;">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#fe4c50;">Merci <span><span style="color:black;"> Pour<span><span style="color:#fe4c50;"> Votre<span><span style="color:black;"> Confiance<span><span style="color:blue;"> .<span></h1>
                             </div>
                             <!--------Slider Ends---------->
 
@@ -188,13 +189,11 @@ require_once('src/functions.php');
                             <ul class="product_sorting">
                                 <li>
                                     <span>Vue:</span>
-                                    <span class="num_sorting_text">04</span>
+                                    <span class="num_sorting_text">09</span>
                                     <i class="fa fa-angle-down"></i>
                                     <ul class="sorting_num">
-                                        <li class="num_sorting_btn"><span>01</span></li>
-                                        <li class="num_sorting_btn"><span>02</span></li>
-                                        <li class="num_sorting_btn"><span>03</span></li>
-                                        <li class="num_sorting_btn"><span>04</span></li>
+                                        <li class="num_sorting_btn"><span>12</span></li>
+                                        <li class="num_sorting_btn"><span>15</span></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -209,7 +208,7 @@ require_once('src/functions.php');
                                     </ul>
                                 </div>
                                 <div class="page_total"><span>De</span> 3</div>
-                                <div id="next_page_1" class="page_next"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                <div id="next_page_1" class="page_next"><a onclick="pfft();" href=""fa fa-long-arrow-right"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
                             </div>
 
                         </div>
@@ -221,6 +220,9 @@ require_once('src/functions.php');
     </div>
     </div>
     </div>
+    <script>
+        
+    </script>
     <!---------This is where products end---------->
     <!-- Deal of the week -->
 
