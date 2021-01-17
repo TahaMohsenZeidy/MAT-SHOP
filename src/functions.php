@@ -496,6 +496,7 @@ function newsletter(){
   Header('Location:/MVC/contact.php');
 }
 
+
 function generateRandomProduct(){
   if(!isset($_SESSION['panier'])){
     $tab=array();
@@ -581,6 +582,30 @@ function generateRandomProduct(){
   <div class='col' >
   <div class='product-grid' data-isotope='{ 'itemSelector': '.product-item', 'layoutMode': 'fitRows' }>".$resultat."</div> ";
 }
+
+function getFabricants(){
+  global $model;
+  $data=$model->getFabs();
+  $fabs="";
+  foreach($data as $key => $value){
+    foreach($value as $yep){
+      $fabs.=" ".$yep;
+    }
+  }
+  return $fabs;
+}
+function getCouleurs(){
+  global $model;
+  $data=$model->getCols();
+  $cols="";
+  foreach($data as $key => $value){
+    foreach($value as $yep){
+      $cols.=" ".$yep;
+    }
+  }
+  return $cols;
+}
+
 
 function recherche(){
 //error_reporting(0);
