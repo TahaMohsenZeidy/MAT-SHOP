@@ -91,6 +91,15 @@
                       </div>
                   </div>
                   <br>
+                  <div class="form-row">
+                      <div class="col">
+                        <input type="text" name="fabricant" class="form-control" placeholder="fabricant">
+                      </div>
+                      <div class="col">
+                        <input type="text" name="couleur" class="form-control" placeholder="couleur">
+                      </div>
+                  </div>
+                  <br>
                   <input type="submit" name="submit" class="btn btn-primary">
               </form>
 
@@ -273,7 +282,7 @@ function change(code){
       	move_uploaded_file($_FILES["img"]["tmp_name"], $target_dir.$_FILES["img"]["name"]);
         //print_r($_POST);
         $var=$_FILES["img"]["name"];
-        $model->insertProduct($_POST["nomprod"],$_POST["description"],$_POST["aprix"],$_POST["stock"],$_POST["categ"],$var);
+        $model->insertProduct($_POST["nomprod"],$_POST["description"],$_POST["aprix"],$_POST["stock"],$_POST["categ"],$var,$_POST["couleur"],$_POST["fabricant"]);
       }?>
       <?php if(isset($_POST["supp"])){$model->deleteprod($_POST['supp']);}
             if(isset($_POST["subpro"])){$model->updatePromotion($_POST['prom'],$_POST["subpro"]);}

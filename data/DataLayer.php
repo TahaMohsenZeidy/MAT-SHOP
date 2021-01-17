@@ -172,9 +172,9 @@ class DataLayer{
 
     }
 
-    function insertProduct($name,$description,$price,$stock,$category,$image){
-      $sql = "INSERT INTO product ( name, description, price, stock , category, image) VALUES
-      (:name,:description,:price,:stock,:category,:image)";
+    function insertProduct($name,$description,$price,$stock,$category,$image,$couleur,$fabricant){
+      $sql = "INSERT INTO product ( name, description, price, stock , category, image, couleur, fabricant) VALUES
+      (:name,:description,:price,:stock,:category,:image,:couleur,:fabricant)";
       try {
           $result = $this->connexion->prepare($sql);
           $var = $result->execute(array(
@@ -183,7 +183,9 @@ class DataLayer{
               ':price' => $price,
               ':stock'=>$stock,
               ':category' => $category,
-              ':image' => $image
+              ':image' => $image,
+              ':couleur' => $couleur,
+              ':fabricant' => $fabricant
           ));
           if($var){
               return TRUE;
