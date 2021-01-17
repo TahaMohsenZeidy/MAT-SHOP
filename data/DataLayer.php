@@ -480,8 +480,8 @@ class DataLayer{
                 return NULL;
             }
         }
-        function getordersbycustomer($id){
-                $sql = "SELECT * FROM orders WHERE id_customers='$id'";
+        function getfeedback(){
+                $sql = "SELECT message FROM messages";
                 try {
                     $result = $this->connexion->prepare($sql);
                     $var = $result->execute();
@@ -496,6 +496,40 @@ class DataLayer{
                     return NULL;
                 }
             }
+        function getordersbycustomer($id){
+                $sql = "SELECT * FROM orders WHERE id_customers='$id'  ORDER BY created_at DESC";
+                try {
+                    $result = $this->connexion->prepare($sql);
+                    $var = $result->execute();
+                    $data = $result->fetchAll(PDO::FETCH_ASSOC);
+                    if($data){
+                        return $data;
+                    }else{
+                        return FALSE;
+                    }
+
+                } catch (PDOException $th) {
+                    return NULL;
+                }
+            }
+            function updatevalide($id,$newv){
+                    $sql ="UPDATE orders SET valide=$newv WHERE id=$id ";
+                    try {
+                        $result = $this->connexion->prepare($sql);
+                        $var = $result->execute();
+                        if($var){
+                          echo "true";
+                            return TRUE;
+                        }else{
+                            return FALSE;
+                        }
+
+                    } catch (PDOException $th) {
+                        return NULL;
+                    }
+                }
+
+
         function getadmins(){
                 $sql = "SELECT * FROM admin";
                 try {

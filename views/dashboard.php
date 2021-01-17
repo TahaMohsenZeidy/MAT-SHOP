@@ -68,7 +68,10 @@
         <option value='d' selected>bon de livraison</option>";
         <?php $clients = $model->getCustomer();
         foreach($clients as $key => $value):?>
-            <option value=<?php echo $value['id'] ?>>id:<?php echo $value['id']."  ".$value['firstname']?></option>;
+          <?php $orders=$model->getordersbycustomer($value['id']);
+           if(isset($orders[0]['id_customers'])): ?>
+            <option value=<?php echo $value['id'] ?>>id:<?php echo $value['id']."  ".$value['firstname']?></option>
+          <?php endif; ?>
           <?php endforeach ?>
         </select>
         <style>
@@ -139,6 +142,26 @@
         $max=max($arr);
         $min=min($arr);
       ?>
+      <?php //chartContainer5
+      $feedback=$model->getfeedback();
+      $postive=array("nice","beautiful","good","like","love","amazing","tres","bien","joli","pas mal");
+      $negative=array("boring","bad","not","didn't","don't","ne","pas","jamais","rien");
+      $pos=0;
+      $neg=0;
+      foreach ($feedback as $key => $value) {
+        for($i=0;$i<sizeof($postive);$i++){
+        if(strpos($value["message"],$postive[$i]) !==false){
+          $pos++;
+          break;
+        }
+        if(strpos($value["message"],$negative[$i]) !==false){
+          $neg++;
+          break;
+        }
+      }
+      }
+
+       ?>
       <?php
       $cat=array();
       foreach ($data as $key => $value) {
@@ -294,6 +317,32 @@ if($i == 3){break;}  }?>
 }]
 });
 chart.render();
+var chart = new CanvasJS.Chart("chartContainer5", {
+	animationEnabled: true,
+	exportEnabled: true,
+	theme: "light1", // "light1", "light2", "dark1", "dark2"
+	title:{
+		text: "FeedBack",
+    horizontalAlign: "left"
+	},
+  	axisY: {
+      includeZero: true
+    },
+	data: [{
+		type: "column", //change type to bar, line, area, pie, etc
+		//indexLabel: "{y}", //Shows y value on all Data Points
+		indexLabelFontColor: "#5A5757",
+      	indexLabelFontSize: 16,
+		indexLabelPlacement: "outside",
+		dataPoints: [
+		{ label: "good(+)", y: <?php echo $pos; ?> },
+			{ label: "bad(-)", y: <?php echo $neg; ?> }
+
+		]
+	}]
+});
+chart.render();
+
 }
 </script>
         <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
@@ -323,6 +372,12 @@ chart.render();
 <div class="card-body">
 <div id="chartContainer4" style="height: 370px; width: 100%;"></div>
 <p class="card-text">  <h3 class='product_name'><a href ='http://localhost/MVC/categoryadmin.php'>voir les categories  </a></h3></p>
+</div>
+</div>
+<div class="card" style="width: 30rem;">
+<div class="card-body">
+<div id="chartContainer5" style="height: 370px; width: 100%;"></div>
+<p class="card-text">  </p>
 </div>
 </div>
         </div>
@@ -375,3 +430,9 @@ function changev(code){
 </body>
 
 </html>
+<?php
+if(isset($_POST["validite"]) && $_POST["validite"] !="d"){
+  $model->updatevalide($_POST["id"],$_POST["validite"]);
+}
+
+?>

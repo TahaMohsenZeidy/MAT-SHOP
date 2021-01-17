@@ -470,15 +470,14 @@ return "
 
 //hedhom li zed'hom taha
 
-function addMessage(){
-  global $model;
+/*  global $model;
   $contact_name = $_POST["cname"];
   $contact_email = $_POST["cemail"];
   $contact_message = $_POST["cmessage"];
   $data = $model->createMessage($contact_name, $contact_email, $contact_message);
   //lazemni nziid js alert li yqolou rahou l message wsoll.
   Header("Location:/MVC/contact.php");
-}
+}*/
 
 function newsletter(){
   echo "i am called w nabi";
@@ -511,7 +510,7 @@ function generateRandomProduct(){
       array_push($_SESSION["panier"],$_POST["id"]);
       // print_r($_SESSION["panier"]);
       $_SESSION['size']=$_SESSION['size']+1;
-    }  
+    }
   }
   global $model;
   $data=$model->getProduct();
@@ -768,8 +767,8 @@ function getBestSellers(){
     array_push($stock, $oneprod[0]['stock']);
   }
   $output="";
-  for ($x = 0; $x <= 5; $x++) {  
-    $discount = $prices[$x]+15;    
+  for ($x = 0; $x <= 5; $x++) {
+    $discount = $prices[$x]+15;
     $output.=
       "
       <div class=".'"'."owl-item product_slider_item".'"'.">
