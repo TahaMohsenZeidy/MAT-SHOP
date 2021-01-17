@@ -172,9 +172,9 @@ class DataLayer{
 
     }
 
-    function insertProduct($name,$description,$price,$stock,$category,$image){
-      $sql = "INSERT INTO product ( name, description, price, stock , category, image) VALUES
-      (:name,:description,:price,:stock,:category,:image)";
+    function insertProduct($name,$description,$price,$stock,$category,$image,$couleur,$fabricant){
+      $sql = "INSERT INTO product ( name, description, price, stock , category, image, couleur, fabricant) VALUES
+      (:name,:description,:price,:stock,:category,:image,:couleur,:fabricant)";
       try {
           $result = $this->connexion->prepare($sql);
           $var = $result->execute(array(
@@ -183,7 +183,9 @@ class DataLayer{
               ':price' => $price,
               ':stock'=>$stock,
               ':category' => $category,
-              ':image' => $image
+              ':image' => $image,
+              ':couleur' => $couleur,
+              ':fabricant' => $fabricant
           ));
           if($var){
               return TRUE;
@@ -538,8 +540,8 @@ class DataLayer{
                 return NULL;
             }
         }
-        function getordersbycustomer($id){
-                $sql = "SELECT * FROM orders WHERE id_customers='$id'";
+        function getfeedback(){
+                $sql = "SELECT message FROM messages";
                 try {
                     $result = $this->connexion->prepare($sql);
                     $var = $result->execute();
@@ -554,6 +556,40 @@ class DataLayer{
                     return NULL;
                 }
             }
+        function getordersbycustomer($id){
+                $sql = "SELECT * FROM orders WHERE id_customers='$id'  ORDER BY created_at DESC";
+                try {
+                    $result = $this->connexion->prepare($sql);
+                    $var = $result->execute();
+                    $data = $result->fetchAll(PDO::FETCH_ASSOC);
+                    if($data){
+                        return $data;
+                    }else{
+                        return FALSE;
+                    }
+
+                } catch (PDOException $th) {
+                    return NULL;
+                }
+            }
+            function updatevalide($id,$newv){
+                    $sql ="UPDATE orders SET valide=$newv WHERE id=$id ";
+                    try {
+                        $result = $this->connexion->prepare($sql);
+                        $var = $result->execute();
+                        if($var){
+                          echo "true";
+                            return TRUE;
+                        }else{
+                            return FALSE;
+                        }
+
+                    } catch (PDOException $th) {
+                        return NULL;
+                    }
+                }
+
+
         function getadmins(){
                 $sql = "SELECT * FROM admin";
                 try {
